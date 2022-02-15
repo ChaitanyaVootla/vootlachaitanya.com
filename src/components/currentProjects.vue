@@ -150,17 +150,18 @@ export default defineComponent({
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    flex-direction: row;
     margin-top: 20px;
-    padding: 0 8rem;
+    padding: 0 3rem;
     .box-card {
         position: relative;
         background-color: #111;
         border: 1px solid black;
         border-radius: 5px;
         margin: 1rem;
-        width: 40rem;
         color: white;
         display: flex;
+        max-width: 30%;
         flex-direction: column;
         .card-tooltip {
             width: 100%;
