@@ -35,6 +35,9 @@
         <div class="box-card">
             <div class="title">
                 Stonks
+                <span class="desc">
+                    work in progress
+                </span>
             </div>
             
             <img @click="showImageDialog('stonks.png')" src="@/assets/images/stonks.png" class="image"/>
@@ -57,9 +60,47 @@
                         </el-popover>
                     </el-col>
                     <el-col :span="12">
-                        <a target="_blank" href="https://stonks.vootlachaitanya.com" class="no-link-style">
+                        <a target="_blank" href="http://stonks.vootlachaitanya.com" class="no-link-style">
                             <el-button>
                                 stonks.vootlachaitanya.com
+                                <i class="fa-solid fa-square-arrow-up-right"></i>
+                            </el-button>
+                        </a>
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
+        <div class="box-card">
+            <div class="title">
+                Drone
+                <span class="desc">
+                    Trying out drone CI/CD
+                </span>
+            </div>
+            
+            <img @click="showImageDialog('drone.png')" src="@/assets/images/drone.png" class="image"/>
+            <div class="bottom">
+                <el-row>
+                    <el-col :span="12">
+                        <el-popover
+                            placement="top"
+                            :width="200"
+                            trigger="hover"
+                        >
+                        <div class="card-tooltip">not mine duh</div>
+                        <template #reference>
+                            <a target="_blank" href="https://github.com/harness/drone" class="no-link-style">
+                                <el-button>
+                                    View on GitHub <i class="fa-brands fa-github"></i>
+                                </el-button>
+                            </a>
+                        </template>
+                        </el-popover>
+                    </el-col>
+                    <el-col :span="12">
+                        <a target="_blank" href="http://drone.vootlachaitanya.com" class="no-link-style">
+                            <el-button>
+                                drone.vootlachaitanya.com
                                 <i class="fa-solid fa-square-arrow-up-right"></i>
                             </el-button>
                         </a>

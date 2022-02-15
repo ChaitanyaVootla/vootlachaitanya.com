@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Node.js 12
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Setup
+      timeout-minutes: 2
+      run: |
+        ls
+        npm install
+        ls
+    - name: Build
+      timeout-minutes: 2
+      run: |
+        npm run build
+        apt install zip || true
+        zip -r dist.zip dist/
+        ls
+    - name: Release
+      uses: ncipollo/release-action@v1
+      with:
+        name: "release"
+        allowUpdates: true
+        artifacts: "dist.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: "latest"
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: 128.199.22.176
+        username: root
+        password: ${{ secrets.DIGITAL_OCEAN_PASS }}
+        script: |
+          cd /vootla
+          rm -f dist.zip
+          rm -rf ./dist
+          echo "==============================================================="
+          echo "====================== Downloading dist ======================"
+          echo "==============================================================="
+          y | wget https://github.com/ChaitanyaVootla/vootlachaitanya.com/releases/download/latest/dist.zip
+          y | unzip -o dist.zip
