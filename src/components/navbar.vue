@@ -10,7 +10,14 @@
             </div>
             <div class="right">
                 <div class="social-icon">
-                    <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya/"
+                    <a target="_blank" href="https://github.com/ChaitanyaVootla"
+                        class="no-link-style">
+                        <i class="fa-brands fa-github-square"
+                            style="color: #6e5494"></i>
+                    </a>
+                </div>
+                <div class="social-icon">
+                    <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya"
                         class="no-link-style">
                         <i class="fa-brands fa-linkedin"
                             style="color: #0072b1"></i>
