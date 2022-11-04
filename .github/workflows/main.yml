@@ -42,11 +42,13 @@ jobs:
         username: root
         password: ${{ secrets.DIGITAL_OCEAN_PASS }}
         script: |
+          mkdir -p /vootla
           cd /vootla
           rm -f dist.zip
           rm -rf ./dist
           echo "==============================================================="
           echo "====================== Downloading dist ======================"
           echo "==============================================================="
-          y | wget https://github.com/ChaitanyaVootla/vootlachaitanya.com/releases/download/latest/dist.zip
-          y | unzip -o dist.zip
+          wget https://github.com/ChaitanyaVootla/vootlachaitanya.com/releases/download/latest/dist.zip
+          yes | sudo apt install unzip
+          yes | unzip -o dist.zip
