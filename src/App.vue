@@ -12,7 +12,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: white;
-    background: #323232;
+    color: #222;
+    background: #eee;
 }
 </style>
