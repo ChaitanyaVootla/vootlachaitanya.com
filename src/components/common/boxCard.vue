@@ -3,8 +3,8 @@
         <div class="top-info">
             <div class="heading">
                 <div class="title">
-                    <a :href="card.website.link" target="_blank" class="no-link-style">
-                        {{card.title}}
+                    <a :href="card.website.link" target="_blank" class="no-link-style title-container">
+                        <img v-if="card.titleImage" :src="getImgUrl(card.titleImage)" class="title-image"/>{{card.title}}
                     </a>
                 </div>
                 <div class="desc">
@@ -28,11 +28,21 @@
                             </a>
                         </template>
                     </el-popover>
-                    <a target="_blank" :href="card.website.link" class="no-link-style">
-                        <el-button round>
-                            {{card.website.name}}
-                        </el-button>
-                    </a>
+                    <el-popover
+                        placement="top"
+                        :width="200"
+                        trigger="hover"
+                        :disabled="card.website.link"
+                    >
+                        <div class="card-tooltip">yet to host</div>
+                        <template #reference>
+                            <a target="_blank" :href="card.website.link" class="no-link-style">
+                                <el-button :disabled="!card.website.link" round>
+                                    {{card.website.name}}
+                                </el-button>
+                            </a>
+                        </template>
+                    </el-popover>
                 </div>
                 <div class="detailed-description">
                     <slot name="description">
@@ -90,6 +100,14 @@ export default defineComponent({
                 font-size: .9rem;
                 padding: 1rem 0;
                 max-width: 80%;
+            }
+            .title-container {
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+                .title-image {
+                    height: 1.5rem;
+                }
             }
         }
         .image-container {
