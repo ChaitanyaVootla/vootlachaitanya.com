@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="image">
-                <el-avatar :src="getImgUrl('vootla-bg.png')" :size="400"/>
+                <img :src="getImgUrl('vootla-bg.png')"/>
             </div>
         </div>
     </div>
@@ -140,6 +140,12 @@ export default {
             }
         }
         .image {
+            img {
+                background-color: #e3e3e3;
+                border: 1px solid #b7b7b7;
+                border-radius: 100%;
+                background-size: cover;
+            }
             filter: grayscale(1);
             &:hover {
                 filter: grayscale(0);

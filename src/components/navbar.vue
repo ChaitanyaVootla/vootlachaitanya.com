@@ -8,20 +8,16 @@
             </div>
             <div class="right">
                 <el-button size="large" round>
-                    <div class="social-icon">
-                        <a target="_blank" href="https://github.com/ChaitanyaVootla"
-                            class="no-link-style">
-                            GitHub
-                        </a>
-                    </div>
+                    <a target="_blank" href="https://github.com/ChaitanyaVootla"
+                        class="no-link-style">
+                        GitHub
+                    </a>
                 </el-button>
                 <el-button size="large" round>
-                    <div class="social-icon">
-                        <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya"
-                            class="no-link-style">
-                            LinkedIn
-                        </a>
-                    </div>
+                    <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya"
+                        class="no-link-style">
+                        LinkedIn
+                    </a>
                 </el-button>
                 <el-dropdown>
                     <el-button size="large" round>
