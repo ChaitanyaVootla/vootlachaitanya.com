@@ -22,6 +22,34 @@
                     Powered by <a href="https://developers.themoviedb.org/3/getting-started/introduction"
                         target="_blank">The Movie Database API</a>
                 </template>
+                <template v-slot:description>
+                    Movie browser helps you to browse movies and tv shows, search for them using advanced and storable filters,
+                    get watch links and ratings from various sources, and much more.
+                    <br/>
+                    <br/>
+                    Technology stack:
+                    <div class="mt-2">
+                        <div class="pills-heading">Frontend</div>
+                        <div class="pills mt-2">
+                            <span class="pill">Vue 3</span>
+                            <span class="pill">Typescript</span>
+                            <span class="pill">Element plus</span>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="pills-heading">Backend</div>
+                        <div class="pills mt-2">
+                            <span class="pill">Node.js</span>
+                            <span class="pill">Typescript</span>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="pills-heading">Rating and watch link extraction</div>
+                        <div class="pills mt-2">
+                            <span class="pill">Puppeteer on AWS Lambda</span>
+                        </div>
+                    </div>
+                </template>
             </boxCard>
             <boxCard :show-image-dialog="showImageDialog"
                 :card="{
@@ -39,6 +67,35 @@
                 }">
                 <template v-slot:subtitle>
                     work in progress
+                </template>
+                <template v-slot:description>
+                    Stonks is a proof of concept project to see how much can be done without using any paid APIs or services.
+                    <br/>
+                    <br/>
+                    It shows the current and historical stock prices of various companies, and also some additional information like
+                    ownership, delivery percentage per day and market cap.
+                    <br/>
+                    <br/>
+                    It also imports your portfolio from zerodha and shows the current value of your portfolio. what you exits have been,
+                    and what you have gained/lost.
+                    <br/>
+                    <br/>
+                    Technology stack:
+                    <div class="mt-2">
+                        <div class="pills-heading">Frontend</div>
+                        <div class="pills mt-2">
+                            <span class="pill">Vue 3</span>
+                            <span class="pill">Typescript</span>
+                            <span class="pill">Element plus</span>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="pills-heading">Backend</div>
+                        <div class="pills mt-2">
+                            <span class="pill">Node.js</span>
+                            <span class="pill">Typescript</span>
+                        </div>
+                    </div>
                 </template>
             </boxCard>
         </div>
@@ -86,9 +143,9 @@ export default defineComponent({
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
-        gap: 6rem;
+        gap: 2rem;
         flex-direction: row;
-        margin-top: 20px;
+        margin-top: 2rem;
     }
 }
 .el-dialog {

@@ -1,38 +1,48 @@
 <template>
     <div class="box-card">
-        <div class="title">
-            <a :href="card.website.link" target="_blank" class="no-link-style">
-                {{card.title}}
-            </a>
-        </div>
-        <div class="desc">
-            <slot name="subtitle">
-            </slot>
-            <el-tag :type="card.status || 'info'" class="status-tag">Status: {{card.statusText}}</el-tag>
-        </div>
-
-        <img @click="showImageDialog(card.image)" :src="getImgUrl(card.image)" class="image"/>
-        <div class="bottom">
-            <el-popover
-                placement="top"
-                :width="200"
-                trigger="hover"
-                :disabled="!card.github.disabled"
-            >
-                <div class="card-tooltip">not public yet</div>
-                <template #reference>
-                    <a target="_blank" :href="card.github.link" class="no-link-style">
-                        <el-button :disabled="card.github.disabled" round>
-                            View on GitHub
+        <div class="top-info">
+            <div class="heading">
+                <div class="title">
+                    <a :href="card.website.link" target="_blank" class="no-link-style">
+                        {{card.title}}
+                    </a>
+                </div>
+                <div class="desc">
+                    <slot name="subtitle">
+                    </slot>
+                    <el-tag :type="card.status || 'info'" class="status-tag">Status: {{card.statusText}}</el-tag>
+                </div>
+                <div class="links">
+                    <el-popover
+                        placement="top"
+                        :width="200"
+                        trigger="hover"
+                        :disabled="!card.github.disabled"
+                    >
+                        <div class="card-tooltip">not public yet</div>
+                        <template #reference>
+                            <a target="_blank" :href="card.github.link" class="no-link-style">
+                                <el-button :disabled="card.github.disabled" round>
+                                    View on GitHub
+                                </el-button>
+                            </a>
+                        </template>
+                    </el-popover>
+                    <a target="_blank" :href="card.website.link" class="no-link-style">
+                        <el-button round>
+                            {{card.website.name}}
                         </el-button>
                     </a>
-                </template>
-            </el-popover>
-            <a target="_blank" :href="card.website.link" class="no-link-style">
-                <el-button round>
-                    {{card.website.name}}
-                </el-button>
-            </a>
+                </div>
+                <div class="detailed-description">
+                    <slot name="description">
+                    </slot>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img @click="showImageDialog(card.image)" :src="getImgUrl(card.image)" class="image"/>
+            </div>
         </div>
     </div>
 </template>
@@ -67,11 +77,25 @@ export default defineComponent({
     background-color: #f3f3f3;
     border: 1px solid #cacaca;
     padding: 1rem;
+    padding-bottom: 2rem;
     border-radius: 5px;
     display: flex;
     align-items: start;
-    width: 40%;
     flex-direction: column;
+    .top-info {
+        display: flex;
+        .heading {
+            flex: 2;
+            .detailed-description {
+                font-size: .9rem;
+                padding: 1rem 0;
+                max-width: 80%;
+            }
+        }
+        .image-container {
+            flex: 2;
+        }
+    }
     .card-tooltip {
         width: 100%;
         text-align: center;
@@ -80,14 +104,9 @@ export default defineComponent({
         border-radius: 5px;
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        background-color: black;
-        filter: grayscale(1);
+        object-fit: cover;
         margin: 1rem 0;
         cursor: pointer;
-        &:hover {
-            filter: none;
-        }
     }
     .title {
         font-size: 1.3rem;
@@ -101,7 +120,7 @@ export default defineComponent({
         align-items: center;
         gap: 1rem;
     }
-    .bottom {
+    .links {
         padding: 1rem 0;
         display: flex;
         gap: 2rem;

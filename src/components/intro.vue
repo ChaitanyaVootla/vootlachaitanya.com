@@ -108,20 +108,8 @@ export default {
 </script>
 
 <style scoped lang="less">
-.pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
 .pill {
     line-height: 2rem;
-    background-color: #e7e7e7;
-    border: 1px solid #c3c3c3;
-    padding: 0.3rem 0.6rem;
-    border-radius: 1rem;
-    color: #333;
-    margin-right: 0.5rem;
-    width: fit-content;
 }
 .container {
     margin-top: 4rem;
