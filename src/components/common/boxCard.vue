@@ -1,7 +1,9 @@
 <template>
     <div class="box-card">
         <div class="title">
-            {{card.title}}
+            <a :href="card.website.link" target="_blank" class="no-link-style">
+                {{card.title}}
+            </a>
         </div>
         <div class="desc">
             <slot name="subtitle">
@@ -21,7 +23,7 @@
                 <template #reference>
                     <a target="_blank" :href="card.github.link" class="no-link-style">
                         <el-button :disabled="card.github.disabled">
-                            View on GitHub <i class="ml-2 fa-brands fa-github"></i>
+                            View on GitHub
                         </el-button>
                     </a>
                 </template>
@@ -29,7 +31,6 @@
             <a target="_blank" :href="card.website.link" class="no-link-style">
                 <el-button>
                     {{card.website.name}}
-                    <i class="ml-2 fa-solid fa-square-arrow-up-right"></i>
                 </el-button>
             </a>
         </div>
@@ -67,10 +68,9 @@ export default defineComponent({
     border: 1px solid #cacaca;
     padding: 1rem;
     border-radius: 5px;
-    margin: 1rem;
     display: flex;
     align-items: start;
-    max-width: 30%;
+    width: 40%;
     flex-direction: column;
     .card-tooltip {
         width: 100%;

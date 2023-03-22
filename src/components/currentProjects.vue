@@ -76,9 +76,8 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .main-container {
+    margin-top: 3rem;
     .cards-title {
-        text-transform: uppercase;
-        margin: 1rem;
         font-weight: 600;
         font-size: 1.3rem;
         text-align: left;
