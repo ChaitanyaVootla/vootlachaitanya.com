@@ -2,41 +2,36 @@
     <div class="box-card">
         <div class="title">
             {{card.title}}
-            <span class="desc">
-                <slot name="subtitle">
-                </slot>
-            </span>
+        </div>
+        <div class="desc">
+            <slot name="subtitle">
+            </slot>
+            <el-tag :type="card.status || 'info'" class="status-tag">Status: {{card.statusText}}</el-tag>
         </div>
 
         <img @click="showImageDialog(card.image)" :src="getImgUrl(card.image)" class="image"/>
         <div class="bottom">
-            <el-row>
-                <el-col :span="12">
-                    <el-popover
-                        placement="top"
-                        :width="200"
-                        trigger="hover"
-                        :disabled="!card.github.disabled"
-                    >
-                        <div class="card-tooltip">not public yet</div>
-                        <template #reference>
-                            <a target="_blank" :href="card.github.link" class="no-link-style">
-                                <el-button :disabled="card.github.disabled">
-                                    View on GitHub <i class="ml-2 fa-brands fa-github"></i>
-                                </el-button>
-                            </a>
-                        </template>
-                    </el-popover>
-                </el-col>
-                <el-col :span="12">
-                    <a target="_blank" :href="card.website.link" class="no-link-style">
-                        <el-button>
-                            {{card.website.name}}
-                            <i class="ml-2 fa-solid fa-square-arrow-up-right"></i>
+            <el-popover
+                placement="top"
+                :width="200"
+                trigger="hover"
+                :disabled="!card.github.disabled"
+            >
+                <div class="card-tooltip">not public yet</div>
+                <template #reference>
+                    <a target="_blank" :href="card.github.link" class="no-link-style">
+                        <el-button :disabled="card.github.disabled">
+                            View on GitHub <i class="ml-2 fa-brands fa-github"></i>
                         </el-button>
                     </a>
-                </el-col>
-            </el-row>
+                </template>
+            </el-popover>
+            <a target="_blank" :href="card.website.link" class="no-link-style">
+                <el-button>
+                    {{card.website.name}}
+                    <i class="ml-2 fa-solid fa-square-arrow-up-right"></i>
+                </el-button>
+            </a>
         </div>
     </div>
 </template>
@@ -68,12 +63,13 @@ export default defineComponent({
 <style lang="less">
 .box-card {
     position: relative;
-    background-color: #222;
-    border: 1px solid black;
+    background-color: #f3f3f3;
+    border: 1px solid #cacaca;
+    padding: 1rem;
     border-radius: 5px;
     margin: 1rem;
-    color: white;
     display: flex;
+    align-items: start;
     max-width: 30%;
     flex-direction: column;
     .card-tooltip {
@@ -84,33 +80,37 @@ export default defineComponent({
         border-radius: 5px;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        background-color: black;
+        filter: grayscale(1);
         margin: 1rem 0;
+        cursor: pointer;
+        &:hover {
+            filter: none;
+        }
     }
     .title {
-        text-align: left;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 600;
-        padding: 1rem;
-        .desc {
-            padding-left: 1rem;
-            font-weight: 400;
-            font-size: .9rem;
-            margin: 10px 0;
-        }
+        padding: 1rem 0;
+    }
+    .desc {
+        font-weight: 400;
+        font-size: .9rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
     .bottom {
         padding: 1rem 0;
+        display: flex;
+        gap: 2rem;
     }
     button {
         font-weight: 500;
         i {
             margin-left: 5px;
         }
-    }
-    img {
-        border-radius: 0;
-        opacity: 0.9;
     }
 }
 </style>

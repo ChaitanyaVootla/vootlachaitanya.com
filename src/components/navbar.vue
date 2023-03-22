@@ -1,33 +1,29 @@
 <template>
     <div class="navbar">
         <div class="navbar-inner">
-            <!-- <div class="left">
-            </div> -->
             <div class="title">
                 <router-link to="/" class="no-link-style-white">
                     Vootla Chaitanya
                 </router-link>
             </div>
             <div class="right">
-                <el-button class="social-btn">
+                <el-button class="social-btn" size="large">
                     <div class="social-icon">
                         <a target="_blank" href="https://github.com/ChaitanyaVootla"
                             class="no-link-style">
-                            <i class="fa-brands fa-github-square"
-                                style="color: #222"></i>
+                            GitHub
                         </a>
                     </div>
                 </el-button>
-                <el-button class="social-btn">
+                <el-button class="social-btn" size="large">
                     <div class="social-icon">
                         <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya"
                             class="no-link-style">
-                            <i class="fa-brands fa-linkedin"
-                                style="color: #222"></i>
+                            LinkedIn
                         </a>
                     </div>
                 </el-button>
-                <el-button class="resume">
+                <el-button class="resume" size="large">
                     <a href="/Resume.pdf" class="no-link-style">
                         <i class="fa-solid fa-download download-icon"></i> Resume
                     </a>
@@ -50,7 +46,6 @@ export default defineComponent({
 .navbar {
     height: 50px;
     line-height: 50px;
-    padding: 0 20px;
     color: white !important;
     height: 60px;
     .navbar-inner {
@@ -58,7 +53,8 @@ export default defineComponent({
         align-items: center;
         justify-content: space-between;
         height: 60px;
-        padding: 1rem 5rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #cfcfcf;
     }
     .title {
         text-align: center;
@@ -78,22 +74,12 @@ export default defineComponent({
             margin-right: 0.5rem;
         }
     }
-    .social-btn {
-        padding: 0;
-        margin-right: 2rem;
-        .social-icon {
-            a {
-                display: block;
-                font-size: 2.2em;
-            }
-        }
-    }
     .download-icon {
         margin-right: 5px;
     }
     .resume {
         color: #fff !important;
-        background-color: #222;
+        background-color: #5a5a5a;
     }
 }
 </style>

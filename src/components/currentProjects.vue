@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <div class="cards-title">
-            Current Projects
+            My Projects
         </div>
         <div class="cards-container">
             <boxCard :show-image-dialog="showImageDialog"
@@ -14,7 +14,9 @@
                     website: {
                         name: 'TheMovieBrowser.com',
                         link: 'https://themoviebrowser.com',
-                    }
+                    },
+                    statusText: 'Active',
+                    status: ''
                 }">
                 <template v-slot:subtitle>
                     Powered by <a href="https://developers.themoviedb.org/3/getting-started/introduction"
@@ -31,7 +33,9 @@
                     website: {
                         link: 'http://stonks.vootlachaitanya.com',
                         name: 'stonks.vootlachaitanya.com',
-                    }
+                    },
+                    statusText: 'On ice',
+                    status: 'info'
                 }">
                 <template v-slot:subtitle>
                     work in progress
@@ -72,12 +76,11 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .main-container {
-    padding: 4rem 5rem;
     .cards-title {
         text-transform: uppercase;
         margin: 1rem;
         font-weight: 600;
-        font-size: 1.3em;
+        font-size: 1.3rem;
         text-align: left;
     }
     .cards-container {
