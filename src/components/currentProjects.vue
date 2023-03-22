@@ -15,7 +15,7 @@
                         name: 'TheMovieBrowser.com',
                         link: 'https://themoviebrowser.com',
                     },
-                    statusText: 'Active',
+                    statusText: 'In active development',
                     status: ''
                 }">
                 <template v-slot:subtitle>
