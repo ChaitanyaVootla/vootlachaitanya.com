@@ -1,6 +1,7 @@
 <template>
     <nav-bar/>
     <intro/>
+    <div class="separator"></div>
     <current-projects/>
 </template>
 
@@ -21,5 +22,8 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-
+.separator {
+    border-bottom: 1px solid #cfcfcf;
+    margin: 2rem 0;
+}
 </style>

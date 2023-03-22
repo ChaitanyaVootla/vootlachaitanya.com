@@ -22,14 +22,14 @@
                 <div class="card-tooltip">not public yet</div>
                 <template #reference>
                     <a target="_blank" :href="card.github.link" class="no-link-style">
-                        <el-button :disabled="card.github.disabled">
+                        <el-button :disabled="card.github.disabled" round>
                             View on GitHub
                         </el-button>
                     </a>
                 </template>
             </el-popover>
             <a target="_blank" :href="card.website.link" class="no-link-style">
-                <el-button>
+                <el-button round>
                     {{card.website.name}}
                 </el-button>
             </a>

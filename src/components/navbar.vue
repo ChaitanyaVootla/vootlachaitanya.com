@@ -7,7 +7,7 @@
                 </router-link>
             </div>
             <div class="right">
-                <el-button class="social-btn" size="large">
+                <el-button class="social-btn" size="large" round>
                     <div class="social-icon">
                         <a target="_blank" href="https://github.com/ChaitanyaVootla"
                             class="no-link-style">
@@ -15,7 +15,7 @@
                         </a>
                     </div>
                 </el-button>
-                <el-button class="social-btn" size="large">
+                <el-button class="social-btn" size="large" round>
                     <div class="social-icon">
                         <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya"
                             class="no-link-style">
@@ -23,7 +23,7 @@
                         </a>
                     </div>
                 </el-button>
-                <el-button class="resume" size="large">
+                <el-button class="resume" size="large" round>
                     <a href="/Resume.pdf" class="no-link-style">
                         <i class="fa-solid fa-download download-icon"></i> Resume
                     </a>
@@ -79,7 +79,7 @@ export default defineComponent({
     }
     .resume {
         color: #fff !important;
-        background-color: #5a5a5a;
+        background-color: #333;
     }
 }
 </style>
