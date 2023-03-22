@@ -135,6 +135,7 @@ export default {
                 background-size: cover;
                 box-shadow: 0px 10px 33px -4px rgba(0, 0, 0, 0.4);
             }
+            transition: filter .3s;
             filter: grayscale(1);
             &:hover {
                 filter: grayscale(0);
