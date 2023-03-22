@@ -7,7 +7,7 @@
                 </router-link>
             </div>
             <div class="right">
-                <el-button class="social-btn" size="large" round>
+                <el-button size="large" round>
                     <div class="social-icon">
                         <a target="_blank" href="https://github.com/ChaitanyaVootla"
                             class="no-link-style">
@@ -15,7 +15,7 @@
                         </a>
                     </div>
                 </el-button>
-                <el-button class="social-btn" size="large" round>
+                <el-button size="large" round>
                     <div class="social-icon">
                         <a target="_blank" href="https://www.linkedin.com/in/vootlachaitanya"
                             class="no-link-style">
@@ -23,6 +23,25 @@
                         </a>
                     </div>
                 </el-button>
+                <el-dropdown>
+                    <el-button size="large" round>
+                        Contact me
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>
+                                <a href="tel:+917899057199" class="no-link-style">
+                                    <i class="fa-solid fa-phone"></i> 7899057199
+                                </a>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <a href="mailto:chaitanyavootla@proton.me" class="no-link-style">
+                                    <i class="fa-solid fa-envelope"></i> chaitanyavootla@proton.me
+                                </a>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
                 <el-button class="resume" size="large" round>
                     <a href="/Resume.pdf" class="no-link-style">
                         <i class="fa-solid fa-download download-icon"></i> Resume
@@ -67,6 +86,7 @@ export default defineComponent({
         float: right;
         justify-content: right;
         align-items: center;
+        gap: 1rem;
     }
     .el-button {
         font-weight: 600 !important;
