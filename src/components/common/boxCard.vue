@@ -83,6 +83,7 @@ export default defineComponent({
 
 <style lang="less">
 .box-card {
+    box-shadow: 0px 7px 12px 3px rgba(0, 0, 0, 0.15);
     position: relative;
     background-color: #f3f3f3;
     border: 1px solid #cacaca;
@@ -119,12 +120,18 @@ export default defineComponent({
         text-align: center;
     }
     .image {
+        border: 1px solid #cfcfcf;
         border-radius: 5px;
         width: 100%;
         height: 100%;
         object-fit: cover;
         margin: 1rem 0;
         cursor: pointer;
+        filter: grayscale(1);
+        transition: filter .3s;
+        &:hover {
+            filter: grayscale(0);
+        }
     }
     .title {
         font-size: 1.3rem;

@@ -186,7 +186,7 @@ export default defineComponent({
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
-        gap: 2rem;
+        gap: 3rem;
         flex-direction: row;
         margin-top: 2rem;
     }
