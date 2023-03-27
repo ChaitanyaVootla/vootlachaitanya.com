@@ -154,7 +154,7 @@ export default {
             gap: 1rem;
             align-items: center;
             .ref-image {
-                filter: grayscale(1);
+                // filter: grayscale(1);
                 height: 3rem;
                 &:hover {
                     filter: grayscale(0);

@@ -113,25 +113,24 @@ export default defineComponent({
         }
         .image-container {
             flex: 2;
+            .image {
+                border: 1px solid #cfcfcf;
+                border-radius: 5px;
+                width: 100%;
+                object-fit: contain;
+                margin: 1rem 0;
+                cursor: pointer;
+                // filter: grayscale(1);
+                // transition: filter .3s;
+                // &:hover {
+                //     filter: grayscale(0);
+                // }
+            }
         }
     }
     .card-tooltip {
         width: 100%;
         text-align: center;
-    }
-    .image {
-        border: 1px solid #cfcfcf;
-        border-radius: 5px;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        margin: 1rem 0;
-        cursor: pointer;
-        filter: grayscale(1);
-        transition: filter .3s;
-        &:hover {
-            filter: grayscale(0);
-        }
     }
     .title {
         font-size: 1.3rem;

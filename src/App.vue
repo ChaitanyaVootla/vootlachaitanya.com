@@ -15,7 +15,20 @@ body {
     color: #222;
     background: rgb(248, 248, 248);
     margin-bottom: 2rem;
+    
+    // margin: 0;
+    // height: 100vh;
+    // background: linear-gradient(45deg, #ffffff, #e4d5d0, #d0e9ef);
+    // background-size: 600% 600%;
+    // animation: gradientAnimation 12s ease infinite;
 }
+
+@keyframes gradientAnimation {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

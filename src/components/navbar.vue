@@ -57,7 +57,6 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-
 .navbar {
     height: 50px;
     line-height: 50px;
@@ -73,7 +72,7 @@ export default defineComponent({
     }
     .title {
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: 600;
         color: #222;
     }
