@@ -17,5 +17,5 @@ function calculateExperience(startDate: number | string | Date) {
     const yearsStr = years > 0 ? `${years} years` : '';
     const monthsStr = months > 0 ? `${months} months` : '';
   
-    return [yearsStr, monthsStr].filter(Boolean).join(' ');
+    return [yearsStr, monthsStr].filter(Boolean).join(', ');
 }

@@ -14,8 +14,14 @@ export default defineNuxtConfig({
       })
     },
     '@nuxtjs/tailwindcss',
+    "@nuxtjs/google-fonts",
     '@nuxt/image',
   ],
+  googleFonts: {
+    families: {
+      Lato: [100, 300, 400, 700, 900],
+    }
+  },
   vite: {
     vue: {
       template: {
