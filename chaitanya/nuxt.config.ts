@@ -6,6 +6,12 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+  app: {
+    head: {
+      title: 'Chaitanya vootla',
+    },
+  },
+  target: 'static',
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {

@@ -1,8 +1,9 @@
 <template>
-    <div class="flex items-center">
-        <div v-for="exp in experiences" class="w-44 h-30 flex flex-col items-center">
+    <div class="flex items-center gap-5">
+        <div v-for="exp in experiences" :key="exp.name" class="w-44 h-30 flex flex-col items-center
+            rounded-2xl shadow-lg shadow-neutral-300 bg-neutral-50 py-3">
             <NuxtImg :src="exp.image" class="object-contain h-12 w-auto" />
-            <div class="mt-5">{{ exp.name }}</div>
+            <div class="mt-1">{{ exp.name }}</div>
             <div class="text-neutral-500">{{ exp.job }}</div>
             <div class="text-neutral-500 text-xs">{{ exp.time }}</div>
         </div>

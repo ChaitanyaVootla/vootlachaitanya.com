@@ -7,7 +7,7 @@ import { createVuetify, type ThemeDefinition } from 'vuetify'
 const customTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    background: 'rgb(240, 240, 240)',
+    background: '#f1f1f1',
     surface: '#333',
     primary: '#dcdcdc',
     secondary: '#03DAC6',
