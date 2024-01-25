@@ -22,6 +22,7 @@ jobs:
     - name: Build
       timeout-minutes: 2
       run: |
+        pushd chaitanya
         npm run generate
         apt install zip || true
         zip -r dist.zip dist/
