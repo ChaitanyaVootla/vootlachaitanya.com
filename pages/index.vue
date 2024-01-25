@@ -1,13 +1,13 @@
 <template>
-    <div class="flex justify-center mb-10">
-        <div class="w-4/5 flex flex-col flex-wrap">
+    <div class="flex justify-center pb-10 animate-gradientBG">
+        <div class="w-[70%] flex flex-col flex-wrap">
             <Navbar />
             <div class="flex justify-between gap-5">
                 <div class="flex justify-between flex-col flex-grow">
                     <div class="about-me text-lg">
                         <div>
                             Software Engineer with <span class="font-semibold">{{ metadata.experience }}</span>
-                            of experience in building applications that run on both cloud and on-premise.
+                            of experience in building microservice powered web applications.
                         </div>
                         <div class="mt-5">
                             Worked heavily on the full width of the stack, from
@@ -30,3 +30,23 @@
 
 <script setup lang="ts">
 </script>
+
+<style scoped lang="less">
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.animate-gradientBG {
+	// background: linear-gradient(-45deg, #fff, #eee, #aaa, #111);
+	// background-size: 400% 400%;
+	// animation: gradientBG 5s ease infinite;
+}
+</style>

@@ -11,7 +11,6 @@ export default defineNuxtConfig({
       title: 'Chaitanya vootla',
     },
   },
-  target: 'static',
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -25,7 +24,7 @@ export default defineNuxtConfig({
   ],
   googleFonts: {
     families: {
-      Lato: [100, 300, 400, 700, 900],
+      Lato: [100, 200, 300, 400, 500, 600, 700, 800, 900],
     }
   },
   vite: {
