@@ -8,7 +8,8 @@
             <NuxtLink to="https://themoviebrowser.com" target="_blank">
                 <div class="text-xl flex gap-2 items-end font-extrabold text-neutral-800">
                     <NuxtImg src="/images/movie-icon.png" class="h-10 w-auto" />
-                    <div class="underline underline-offset-2">TMB - The Movie Browser</div>
+                    <div class="tracking-widest">TMB</div>
+                    <div class="underline underline-offset-2 text-lg text-neutral-600">themoviebrowser.com</div>
                     <v-chip class="uppercase !font-bold" size="small" color="success">
                         <v-icon icon="mdi-circle" size="x-small" class="mr-1 transition-all ease-in-out"></v-icon>
                         in active development
