@@ -49,5 +49,6 @@ jobs:
           echo "====================== Downloading dist ======================"
           echo "==============================================================="
           wget https://github.com/ChaitanyaVootla/vootlachaitanya.com/releases/download/latest/dist.zip
+          ls
           yes | sudo apt install unzip
           yes | unzip -o dist.zip
