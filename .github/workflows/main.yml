@@ -31,7 +31,7 @@ jobs:
       with:
         name: "release"
         allowUpdates: true
-        artifacts: "dist.zip"
+        artifacts: "chaitanya/dist.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: "latest"
     - name: Deploy
