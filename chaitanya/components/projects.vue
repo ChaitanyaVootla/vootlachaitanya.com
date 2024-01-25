@@ -21,7 +21,7 @@
             <iframe src="https://themoviebrowser.com" class="w-full h-[80rem] rounded-lg" title="TMB"></iframe>
 
             <div class="mt-10 flex gap-20 items-center justify-between">
-                <NuxtImg src="images/tmbRatings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-1/2" />
+                <NuxtImg src="images/tmbratings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-1/2" />
                 TMB helps you find the right movie or TV show by bringing ratings and watch links from
                 multiple sources in one place.
             </div>
