@@ -1,7 +1,7 @@
 <template>
-    <div class="flex justify-center pb-10 animate-gradientBG">
-        <div class="w-[70%] flex flex-col flex-wrap">
-            <Navbar />
+    <Navbar />
+    <div class="flex justify-center pb-10">
+        <div class="w-[80%] flex flex-col flex-wrap">
             <div class="flex justify-between gap-5">
                 <div class="flex justify-between flex-col flex-grow">
                     <div class="about-me text-lg">
@@ -42,11 +42,5 @@
 	100% {
 		background-position: 0% 50%;
 	}
-}
-
-.animate-gradientBG {
-	// background: linear-gradient(-45deg, #fff, #eee, #aaa, #111);
-	// background-size: 400% 400%;
-	// animation: gradientBG 5s ease infinite;
 }
 </style>

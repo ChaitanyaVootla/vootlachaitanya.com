@@ -44,11 +44,11 @@
                     TMB is THE platform for movie enthusiasts
                 </div>
             </div>
-            <div class="italic text-sm mb-1 mt-3">Below is a live window into TMB, you can also visit the site by clicking the title above.</div>
+            <div class="italic text-sm mb-1 mt-3 text-[#129856]">Below is a live window into TMB, you can also visit the site by clicking the title above.</div>
             <iframe src="https://themoviebrowser.com" class="w-full h-[80rem] rounded-lg" title="TMB"></iframe>
 
             <div class="mt-10 flex gap-20 items-center justify-between">
-                <NuxtImg src="images/tmbratings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3" />
+                <NuxtImg src="images/tmbratings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
                 <div>
                     <div class="font-semibold text-2xl mb-2">
                         Ratings and Watch Links
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="mt-10 flex gap-20 items-center flex-row-reverse justify-between">
-                <NuxtImg src="images/tmbtv.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-full" />
+                <NuxtImg src="images/tmbtv.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
                 <div>
                     <div class="font-semibold text-2xl mb-2">
                         Track your content
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="mt-10 flex gap-20 items-center justify-between">
-                <NuxtImg src="images/tmbdiscover.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-1/2" />
+                <NuxtImg src="images/tmbdiscover.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
                 <div>
                     <div class="font-semibold text-2xl mb-2">
                         Powerful Discovery with Custom filters
@@ -86,6 +86,21 @@
                     And it lets you save your custom filters for later use and even share them with everyone.
                     <div class="text-[#129856]">
                         Discovery feature is powered by the discover api from TMDB
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 flex gap-20 items-center flex-row-reverse justify-between">
+                <NuxtImg src="images/tmbai.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
+                <div>
+                    <div class="font-semibold text-2xl mb-2">
+                        AI Recommendations and discovery <span class="italic text-lg">BETA</span>
+                    </div>
+                    AI recommendation engine is still in beta, but it can already recommend movies based on similarity.
+                    <br />
+                    User recommendations are coming soon.
+                    <br />
+                    <div class="text-[#129856]">
+                        AI features are based on a custom vector embeddings database that is built using a combination of movie metadata using sentence transformers stored in chromadb.
                     </div>
                 </div>
             </div>
@@ -102,6 +117,14 @@
                             <div v-if="skill.name" class="text-lg font-semibold ml-2">{{ skill.name }}</div>
                         </div>
                     </div>
+                </div>
+                <div class="mt-5">
+                    TMB is fully open source, visit the
+                            <v-btn href="https://github.com/ChaitanyaVootla/movie-browser/tree/nuxt" target="_blank" variant="tonal" prepend-icon="mdi-github"
+                                rounded>
+                                github repo
+                            </v-btn>
+                    for more info.
                 </div>
             </div>
         </div>
