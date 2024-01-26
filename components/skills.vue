@@ -1,13 +1,12 @@
 <template>
     <div>
         <div class="flex items-center">
-            <div class="uppercase text-neutral-500 w-36">Stuff I Know</div>
-            <div class="border-b-2 w-full"></div>
+            <div class="uppercase text-neutral-500 w-auto">Stuff I Know</div>
         </div>
 
-        <div class="flex gap-10 h-12 mt-5 flex-wrap">
+        <div class="flex mt-2 md:gap-10 max-md:gap-2 flex-wrap max-md:justify-center">
             <div v-for="skill in skills" :key="skill.name"
-                class="h-full flex items-center shadow-md shadow-neutral-200 rounded-2xl p-3 bg-neutral-50" >
+                class="flex items-center shadow-md shadow-neutral-200 rounded-2xl p-3 bg-neutral-50 h-12 max-md:h-10" >
                 <NuxtImg :src="skill.image" class="h-full" />
                 <div v-if="skill.name" class="text-xl font-semibold ml-2">{{ skill.name }}</div>
             </div>
