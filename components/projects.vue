@@ -102,7 +102,7 @@
                         User recommendations are coming soon.
                         <br />
                         <div class="text-[#129856]">
-                            AI features are based on a custom vector embeddings database that is built using a combination of movie metadata using sentence transformers stored in chromadb.
+                            AI features are based on a custom vector embeddings database that is built using a combination of movie metadata using openai <b>text-embedding-3-small</b> model and stored in chromadb.
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="mt-10 flex items-end gap-1">
                         TMB is fully open source, visit the repo
-                                <v-btn href="https://github.com/ChaitanyaVootla/movie-browser/tree/nuxt" target="_blank" variant="tonal" prepend-icon="mdi-github"
+                                <v-btn href="https://github.com/ChaitanyaVootla/movie-browser" target="_blank" variant="tonal" prepend-icon="mdi-github"
                                     rounded size="small">
                                     ChaitanyaVootla / movie-browser
                                 </v-btn>
@@ -157,6 +157,9 @@ const skills = [
     {
         image: 'images/chroma.svg',
         name: 'Chroma',
+    },
+    {
+        image: 'images/openai.svg',
     },
 ];
 
