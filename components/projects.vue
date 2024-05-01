@@ -5,9 +5,9 @@
             <div class="info flex-grow w-full text-lg">
                 <NuxtLink to="https://themoviebrowser.com" target="_blank">
                     <div class="text-xl flex gap-2 items-end font-extrabold text-neutral-800">
-                        <NuxtImg src="/images/movie-icon.png" class="h-10 w-auto" />
-                        <div class="tracking-widest">TMB</div>
-                        <div class="underline underline-offset-2 text-lg text-neutral-600">themoviebrowser.com</div>
+                        <NuxtImg src="/images/movie-icon.png" class="h-9 w-auto" />
+                        <div class="tracking-widest"></div>
+                        <div class="underline underline-offset-2 text-xl text-neutral-600">TheMovieBrowser.com</div>
                         <v-chip class="uppercase !font-bold" size="small" color="success">
                             <v-icon icon="mdi-circle" size="x-small" class="mr-1 transition-all ease-in-out"></v-icon>
                             in active development
@@ -17,7 +17,7 @@
                 <div class="mt-3 font-medium text-base">
                     <div class="text-lg font-default">
                         TMB is a movie and TV show discovery platform that helps you find the right content to watch.
-                        With features like ratings, watch links, watchlist, discovery and AI recommendations TMB is the only platform you need to find your next watch.
+                        With features like ratings from multiple sources, watch links from popular OTT platforms, watchlists, discovery and AI recommendations TMB is the only platform you need to find your next watch.
                     </div>
                     <div class="tmb-list ml-3">
                         <div class="mt-1">
@@ -44,8 +44,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="font-semibold mt-2">
-                        TMB is THE platform for movie enthusiasts
+                    <div class="font-medium mt-2">
+                        TMB is being built to be <b>THE</b> platform for movie enthusiasts
                     </div>
                 </div>
 
