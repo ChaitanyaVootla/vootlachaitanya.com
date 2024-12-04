@@ -1,10 +1,9 @@
 <template>
-    <div class="flex justify-center">
+    <div class="flex justify-center bg-black">
         <div class="flex justify-between items-center h-20 md:mb-10 max-md:mb-5
-            overflow-hidden w-full md:px-[15%]
-            bg-neutral-50 shadow-md shadow-neutral-200 max-md:!text-xs">
+            overflow-hidden w-full md:px-[15%] max-md:!text-xs">
             <div class="name max-md:!text-sm text-2xl uppercase font-medium flex-grow flex ml-10">
-                <div class="tracking-widest [word-spacing:10px]">Chaitanya Vootla</div>
+                <div class="tracking-widest [word-spacing:10px] font-bold">Chaitanya Vootla</div>
                 <div class="cursor-effect ml-1">_</div>
             </div>
             <div class="flex h-full items-center uppercase">

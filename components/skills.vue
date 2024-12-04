@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="flex items-center">
-            <div class="uppercase text-neutral-500 w-auto">My Skill Set</div>
+            <div class="uppercase text-neutral-300 w-auto">My Skill Set</div>
         </div>
 
-        <div class="flex mt-2 md:gap-10 max-md:gap-2 flex-wrap max-md:justify-center saturate-0">
-            <div v-for="skill in skills" :key="skill.name" class="flex items-center p-3 h-12 max-md:h-10" >
+        <div class="flex mt-2 md:gap-10 max-md:gap-2 flex-wrap max-md:justify-center saturate-50">
+            <div v-for="skill in skills" :key="skill.name" class="flex items-center p-3 h-12 max-md:h-10 bg-white rounded-lg" >
                 <NuxtImg :src="skill.image" class="h-full" />
                 <div v-if="skill.name" class="text-xl font-semibold ml-2">{{ skill.name }}</div>
             </div>

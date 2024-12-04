@@ -12,6 +12,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  word-spacing: 1px;
+  word-spacing: 2px;
 }
 </style>

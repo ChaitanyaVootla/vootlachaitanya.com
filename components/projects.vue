@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="uppercase text-neutral-500 w-32">My Projects</div>
+        <div class="uppercase text-neutral-300 w-32">My Projects</div>
         <div class="project pb-10 flex mt-2">
             <div class="info flex-grow w-full text-lg">
                 <NuxtLink to="https://themoviebrowser.com" target="_blank">
-                    <div class="text-xl flex gap-2 items-end font-extrabold text-neutral-800">
+                    <div class="text-xl flex gap-2 items-end font-extrabold text-white">
                         <NuxtImg src="/images/movie-icon.png" class="h-9 w-auto" />
                         <div class="tracking-widest"></div>
-                        <div class="underline underline-offset-2 text-xl text-neutral-600">TheMovieBrowser.com</div>
-                        <v-chip class="uppercase !font-bold" size="small" color="success">
-                            <v-icon icon="mdi-circle" size="x-small" class="mr-1 transition-all ease-in-out"></v-icon>
+                        <div class="underline underline-offset-4 text-3xl">TheMovieBrowser.com</div>
+                        <v-chip class="uppercase !font-bold !text-base ml-5" size="small" color="success">
+                            <v-icon icon="mdi-circle" size="x-small" class="mr-1 transition-all ease-in-out blink"></v-icon>
                             in active development
                         </v-chip>
                     </div>
@@ -19,7 +19,7 @@
                         TMB is a movie and TV show discovery platform that helps you find the right content to watch.
                         With features like ratings from multiple sources, watch links from popular OTT platforms, watchlists, discovery and AI recommendations TMB is the only platform you need to find your next watch.
                     </div>
-                    <div class="tmb-list ml-3">
+                    <div class="tmb-list ml-3 my-7">
                         <div class="mt-1">
                             Feel like you've watched everything? TMB begs to differ with its powerful discovery feature.
                         </div>
@@ -44,13 +44,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="font-medium mt-2">
+                    <div class="font-medium">
                         TMB is being built to be <b>THE</b> platform for movie enthusiasts
                     </div>
                 </div>
 
-                <div class="mt-2 flex gap-20 items-center justify-between">
-                    <NuxtImg src="images/tmbratings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
+                <div class="mt-10 flex gap-20 items-center justify-between">
+                    <NuxtImg src="images/tmbratings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
                             Ratings and Watch Links
@@ -62,8 +62,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-10 flex gap-20 items-center flex-row-reverse justify-between">
-                    <NuxtImg src="images/tmbtv.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
+                <div class="mt-20 flex gap-20 items-center flex-row-reverse justify-between">
+                    <NuxtImg src="images/tmbtv.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
                             Track your content
@@ -76,8 +76,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-10 flex gap-20 items-center justify-between">
-                    <NuxtImg src="images/tmbdiscover.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
+                <div class="mt-20 flex gap-20 items-center justify-between">
+                    <NuxtImg src="images/tmbdiscover.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
                             Powerful Discovery with Custom filters
@@ -91,8 +91,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-10 flex gap-20 items-center flex-row-reverse justify-between">
-                    <NuxtImg src="images/tmbai.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-600" />
+                <div class="mt-20 flex gap-20 items-center flex-row-reverse justify-between">
+                    <NuxtImg src="images/tmbai.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
                             AI Recommendations and discovery <span class="italic text-lg">BETA</span>
@@ -107,20 +107,20 @@
                     </div>
                 </div>
 
-                <div class="mt-10">
+                <div class="mt-20">
                     <div class="text-2xl font-semibold">
                         Tech Stack
                     </div>
                     <div>
                         <div class="flex gap-10 h-12 mt-5 flex-wrap">
                             <div v-for="skill in skills" :key="skill.image"
-                                class="h-full flex items-center shadow-md shadow-neutral-200 rounded-2xl p-3 bg-neutral-50" >
+                                class="h-full flex items-center shadow-md shadow-neutral-800 rounded-2xl p-3 bg-neutral-50 text-black" >
                                 <NuxtImg :src="skill.image" class="h-full" />
                                 <div v-if="skill.name" class="text-lg font-semibold ml-2">{{ skill.name }}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-10 flex items-end gap-1">
+                    <div class="mt-10 flex items-end gap-1 bg-neutral-800 p-4 rounded-lg">
                         TMB is fully open source, visit the repo
                                 <v-btn href="https://github.com/ChaitanyaVootla/movie-browser" target="_blank" variant="tonal" prepend-icon="mdi-github"
                                     rounded size="small">
@@ -129,8 +129,12 @@
                         for more info. Dont forget to <v-icon class="text-yellow-400">mdi-star</v-icon> the repo if you like it.
                     </div>
                 </div>
-                <div class="italic text-sm mb-1 mt-3 text-[#129856]">Below is a live window into TMB, you can also visit the site by clicking the title above.</div>
-                <iframe src="https://themoviebrowser.com" class="w-full h-[60rem] rounded-lg" title="TMB"></iframe>
+                <div class="flex py-1 items-center gap-3 mt-5">
+                    <div class="w-4 h-4 rounded-full bg-red-500 blink"></div>
+                    <span class="text-red-500 font-semibold">LIVE</span>
+                </div>
+                <div class="italic text-sm mb-5 text-[#129856]">Below is a live window into TMB, you can also visit the site by clicking the title above.</div>
+                <iframe src="https://themoviebrowser.com" class="w-full h-[60rem] rounded-lg border-[2px] border-red-500" title="TMB"></iframe>
             </div>
         </div>
     </div>
@@ -179,5 +183,12 @@ const updateIFrame = () => {
             margin-right: 0.5rem;
         }
     }
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+.blink {
+    animation: blink 2s infinite;
 }
 </style>
