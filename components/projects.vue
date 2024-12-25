@@ -4,7 +4,7 @@
         <div class="project pb-10 flex mt-2">
             <div class="info flex-grow w-full text-lg">
                 <NuxtLink to="https://themoviebrowser.com" target="_blank">
-                    <div class="text-xl flex gap-2 items-end font-extrabold text-white">
+                    <div class="text-xl flex flex-wrap gap-2 items-end font-extrabold text-white">
                         <NuxtImg src="/images/movie-icon.png" class="h-9 w-auto" />
                         <div class="tracking-widest"></div>
                         <div class="underline underline-offset-4 text-3xl">TheMovieBrowser.com</div>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="mt-10 flex gap-20 items-center justify-between">
+                <div class="mt-10 flex max-md:flex-wrap gap-20 items-center justify-between">
                     <NuxtImg src="images/tmbratings.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-20 flex gap-20 items-center flex-row-reverse justify-between">
+                <div class="mt-20 flex max-md:flex-wrap gap-20 items-center flex-row-reverse justify-between">
                     <NuxtImg src="images/tmbtv.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-20 flex gap-20 items-center justify-between">
+                <div class="mt-20 flex max-md:flex-wrap gap-20 items-center justify-between">
                     <NuxtImg src="images/tmbdiscover.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-20 flex gap-20 items-center flex-row-reverse justify-between">
+                <div class="mt-20 flex max-md:flex-wrap gap-20 items-center flex-row-reverse justify-between">
                     <NuxtImg src="images/tmbai.png" class="p-2 rounded-md bg-black mt-2 object-contain h-fit mb-1 w-2/3 shadow-lg shadow-neutral-800" />
                     <div>
                         <div class="font-semibold text-2xl mb-2">
@@ -107,20 +107,18 @@
                     </div>
                 </div>
 
-                <div class="mt-20">
+                <div class="mt-20 flex flex-col">
                     <div class="text-2xl font-semibold">
                         Tech Stack
                     </div>
-                    <div>
-                        <div class="flex gap-10 h-12 mt-5 flex-wrap">
-                            <div v-for="skill in skills" :key="skill.image"
-                                class="h-full flex items-center shadow-md shadow-neutral-800 rounded-2xl p-3 bg-neutral-50 text-black" >
-                                <NuxtImg :src="skill.image" class="h-full" />
-                                <div v-if="skill.name" class="text-lg font-semibold ml-2">{{ skill.name }}</div>
-                            </div>
+                    <div class="flex gap-4 mt-5 flex-wrap">
+                        <div v-for="skill in skills" :key="skill.image"
+                            class="h-12 flex items-center shadow-md shadow-neutral-800 rounded-2xl p-3 bg-neutral-50 text-black" >
+                            <NuxtImg :src="skill.image" class="h-full" />
+                            <div v-if="skill.name" class="text-lg font-semibold ml-2">{{ skill.name }}</div>
                         </div>
                     </div>
-                    <div class="mt-10 flex items-end gap-1 bg-neutral-800 p-4 rounded-lg">
+                    <div class="mt-10 flex flex-wrap items-end gap-1 bg-neutral-800 p-4 rounded-lg">
                         TMB is fully open source, visit the repo
                                 <v-btn href="https://github.com/ChaitanyaVootla/movie-browser" target="_blank" variant="tonal" prepend-icon="mdi-github"
                                     rounded size="small">

@@ -5,8 +5,8 @@
             rounded-2xl shadow-lg shadow-neutral-900 border-neutral-800 border-2 py-3">
             <NuxtImg :src="exp.image" class="object-contain h-12 w-auto" />
             <div class="mt-1 max-md:text-sm">{{ exp.name }}</div>
-            <div class="text-neutral-500 max-md:text-xs">{{ exp.job }}</div>
-            <div class="text-neutral-500 text-xs">{{ exp.time }}</div>
+            <div class="text-neutral-500 max-md:text-[11px]">{{ exp.job }}</div>
+            <div class="text-neutral-500 text-xs max-md:text-[10px]">{{ exp.time }}</div>
         </div>
     </div>
 </template>
