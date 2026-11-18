@@ -31,8 +31,8 @@
                                 </a>
                             </el-dropdown-item>
                             <el-dropdown-item>
-                                <a href="mailto:chaitanyavootla@proton.me" class="no-link-style">
-                                    <i class="fa-solid fa-envelope"></i> chaitanyavootla@proton.me
+                                <a href="mailto:chaitanyavootla42@gmail.com" class="no-link-style">
+                                    <i class="fa-solid fa-envelope"></i> chaitanyavootla42@gmail.com
                                 </a>
                             </el-dropdown-item>
                         </el-dropdown-menu>
