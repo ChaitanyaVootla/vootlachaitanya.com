@@ -1,4 +1,10 @@
-# Nuxt dev/build outputs
+# Next.js build outputs
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# Old Nuxt outputs (legacy/)
 .output
 .data
 .nuxt
@@ -17,6 +23,10 @@ logs
 .DS_Store
 .fleet
 .idea
+.claude
+
+# Snapshots of the live S3 bucket taken before a deploy
+.live-backup-*
 
 # Local env files
 .env
