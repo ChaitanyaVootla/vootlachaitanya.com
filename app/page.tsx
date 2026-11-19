@@ -3,7 +3,7 @@ import { CopyEmail } from "@/components/copy-email";
 import { LivePreview } from "@/components/live-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { agentPrompt } from "@/lib/llms";
-import { agents, career, contact, facts, focus, machine, nav, project, site, stack } from "@/lib/site";
+import { agents, career, contact, facts, focus, machine, nav, projects, site, stack } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -33,6 +33,7 @@ function SectionHead({ index, label }: { index: number; label: string }) {
 
 export default function Home() {
   const { axis, spans } = career;
+  const tmb = projects.featured;
   const range = axis.end - axis.start;
   const ticks = Array.from({ length: range / 2 }, (_, i) => axis.start + i * 2);
   // Rendered at build time; the open-ended bar runs to "now" as of the last deploy.
@@ -113,15 +114,15 @@ export default function Home() {
                   <a href={site.company.url} target="_blank" rel="noopener">
                     {site.company.name}
                   </a>
-                  . Mostly working on agents these days, with a day job in clinical-trial software.
+                  , where I build AI agents for clinical trials. Most of the work is the harness around the model.
                 </p>
                 <div className="actions">
                   <a className="btn btn--lg" href={`mailto:${site.email}`}>
                     Start a conversation
                     <Arrow dir="up-right" />
                   </a>
-                  <a className="btn btn--ghost btn--lg" href="#project">
-                    View active project
+                  <a className="btn btn--ghost btn--lg" href="#projects">
+                    See side projects
                     <Arrow dir="down" />
                   </a>
                 </div>
@@ -239,27 +240,27 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section" id="project">
+        <section className="section" id="projects">
           <div className="wrap section__grid">
-            <SectionHead index={4} label={project.eyebrow} />
+            <SectionHead index={4} label={projects.eyebrow} />
             <div className="section__body">
-              <h2 className="reveal">{project.heading}</h2>
-              <p className="lede reveal">{project.lede}</p>
+              <h2 className="reveal">{projects.heading}</h2>
+              <p className="lede reveal">{projects.lede}</p>
 
               <div className="project reveal">
                 <div className="project__main">
                   <p className="status">
                     <span className="live-dot" aria-hidden="true" />
-                    {project.status}
+                    {tmb.status}
                   </p>
-                  <h3 className="project__name">{project.name}</h3>
-                  <p className="project__body">{project.body}</p>
+                  <h3 className="project__name">{tmb.name}</h3>
+                  <p className="project__body">{tmb.body}</p>
                   <div className="actions">
-                    <a className="btn" href={project.url} target="_blank" rel="noopener">
+                    <a className="btn" href={tmb.url} target="_blank" rel="noopener">
                       Visit site
                       <Arrow dir="up-right" />
                     </a>
-                    <a className="btn btn--ghost" href={project.source} target="_blank" rel="noopener">
+                    <a className="btn btn--ghost" href={tmb.source} target="_blank" rel="noopener">
                       GitHub
                       <Arrow dir="up-right" />
                     </a>
@@ -267,12 +268,12 @@ export default function Home() {
                 </div>
                 <div className="project__side">
                   <ul className="ticks">
-                    {project.capabilities.map((capability) => (
+                    {tmb.capabilities.map((capability) => (
                       <li key={capability}>{capability}</li>
                     ))}
                   </ul>
                   <ul className="chips" aria-label="Stack">
-                    {project.stack.map((tech) => (
+                    {tmb.stack.map((tech) => (
                       <li key={tech}>{tech}</li>
                     ))}
                   </ul>
@@ -281,7 +282,49 @@ export default function Home() {
             </div>
           </div>
           <div className="wrap project__preview reveal">
-            <LivePreview url={project.url} host={project.host} title={`Live preview of ${project.name}`} />
+            <LivePreview url={tmb.url} host={tmb.host} title={`Live preview of ${tmb.name}`} />
+          </div>
+
+          <div className="wrap others">
+            {projects.others.map((other) => (
+              <article key={other.name} className="other reveal">
+                <p className="status">
+                  {/* Pulsing dot: deployed and running. Hollow dot: not online yet. */}
+                  <span className={other.link ? "live-dot" : "live-dot live-dot--idle"} aria-hidden="true" />
+                  {other.status}
+                </p>
+                <h3 className="project__name">{other.name}</h3>
+                <p className="other__tagline">{other.tagline}</p>
+                <p className="project__body">{other.body}</p>
+                <ul className="ticks">
+                  {other.capabilities.map((capability) => (
+                    <li key={capability}>{capability}</li>
+                  ))}
+                </ul>
+                <ul className="chips" aria-label="Stack">
+                  {other.stack.map((tech) => (
+                    <li key={tech}>{tech}</li>
+                  ))}
+                </ul>
+                {(other.link || other.source) && (
+                  <p className="other__link">
+                    {other.link && (
+                      <a className="btn btn--ghost" href={other.link.href} target="_blank" rel="noopener">
+                        {other.link.label}
+                        <Arrow dir="up-right" />
+                      </a>
+                    )}
+                    {other.source && (
+                      <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener">
+                        GitHub
+                        <Arrow dir="up-right" />
+                      </a>
+                    )}
+                    {other.link && <span>{other.link.note}</span>}
+                  </p>
+                )}
+              </article>
+            ))}
           </div>
         </section>
 

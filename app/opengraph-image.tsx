@@ -84,7 +84,7 @@ export default async function OpengraphImage() {
             color: muted,
           }}
         >
-          <div style={{ display: "flex" }}>AI AGENTS · CLINICAL TRIALS · FULL-STACK</div>
+          <div style={{ display: "flex" }}>AI AGENTS FOR CLINICAL TRIALS</div>
           <div style={{ display: "flex", color: paper }}>{site.url.replace("https://", "")}</div>
         </div>
       </div>

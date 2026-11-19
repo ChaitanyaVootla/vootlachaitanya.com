@@ -1,4 +1,6 @@
-import { agents, career, focus, project, site, stack } from "./site";
+import { agents, career, focus, projects, site, stack } from "./site";
+
+const tmb = projects.featured;
 
 // Plain-text renderings of the site for agents and crawlers. They are emitted
 // at build time by the route handlers in app/llms.txt, app/llms-full.txt and
@@ -24,7 +26,8 @@ This site is the personal portfolio of ${site.name}. The full agent-readable ver
 
 ## Projects
 
-- [TheMovieBrowser](${project.url}): Movie/TV discovery with multi-source ratings, watchlists, and embedding-backed recommendations. Source: ${project.source}
+- [TheMovieBrowser](${tmb.url}): Movie/TV discovery with multi-source ratings, watchlists, and embedding-backed recommendations. Source: ${tmb.source}
+${projects.others.map((p) => `- ${p.link ? `[${p.name}](${p.link.href})` : p.name}: ${p.tagline}. ${p.status}${p.link ? ` (${p.link.note})` : ""}.`).join("\n")}
 
 ## Contact
 
@@ -58,7 +61,7 @@ ${site.intro}
 - **LinkedIn**: ${site.linkedin}
 - **Resume**: ${site.url}${site.resume}
 ${rule}
-## Where my time goes
+## What I work on
 
 ${focus.items.map((item) => `### ${item.title}\n\n${item.body}`).join("\n\n")}
 ${rule}
@@ -72,14 +75,25 @@ ${spans.map((s) => `### ${s.org} — ${s.role} (${s.period.replace(/—/g, "–"
 ${rule}
 ## Projects
 
-### ${project.name}
+### ${tmb.name}
 
-Status: ${project.status.toLowerCase()}. ${project.body}
+Status: ${tmb.status.toLowerCase()}. ${tmb.body}
 
-- Site: ${project.url}
-- Source: ${project.source}
-- Capabilities: ${project.capabilities.join(", ").toLowerCase()}.
-- Stack: ${project.stack.join(", ")}.
+- Site: ${tmb.url}
+- Source: ${tmb.source}
+- Capabilities: ${tmb.capabilities.join(", ").toLowerCase()}.
+- Stack: ${tmb.stack.join(", ")}.
+
+${projects.others
+  .map(
+    (p) => `### ${p.name} — ${p.tagline}
+
+Status: ${p.status}. ${p.body}
+
+${p.link ? `- Site: ${p.link.href} (${p.link.note})\n` : ""}${p.source ? `- Source: ${p.source}\n` : ""}- Capabilities: ${p.capabilities.join("; ")}.
+- Stack: ${p.stack.join(", ")}.`,
+  )
+  .join("\n\n")}
 ${rule}
 ## Skills
 

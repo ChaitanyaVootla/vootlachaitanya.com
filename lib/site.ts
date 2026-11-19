@@ -8,14 +8,14 @@ export const site = {
   familyName: "Vootla",
   role: "Staff Engineer",
   company: { name: "Faeth Therapeutics", url: "https://www.faeththerapeutics.com" },
-  title: "Chaitanya Vootla — Staff Engineer · AI Agents · Clinical Trials",
+  title: "Chaitanya Vootla — Staff Engineer building AI agents for clinical trials",
   description:
-    "Staff engineer building agent harnesses, clinical-trial software at Faeth Therapeutics, and full-stack product platforms. Ten years of shipping production systems.",
-  tagline: "Staff engineer. Mostly working on agents right now.",
+    "Staff engineer at Faeth Therapeutics, building AI agents and the harnesses around them for clinical trials. Ten years of full-stack product engineering behind it.",
+  tagline: "Staff engineer. I build AI agents for clinical trials.",
   summary:
-    "Staff engineer working on agent harnesses and clinical-trial software. Ten years of full-stack product engineering before that. Day job at Faeth Therapeutics.",
+    "Staff engineer at Faeth Therapeutics, building AI agents and the harnesses around them for clinical trials. Ten years of full-stack product engineering before that.",
   intro:
-    "Most of my time goes into agent harnesses these days — the scaffolding around agents is where the interesting work is. Day job is clinical-trial software at Faeth Therapeutics, which keeps me honest about reliability. About ten years of full-stack before all this.",
+    "I build AI agents for clinical trials at Faeth Therapeutics. Most of that work is the harness, the scaffolding around the model, and the domain keeps me honest about reliability. Evenings go to side projects built the same way. About ten years of full-stack before all this.",
   email: "chaitanyavootla42@gmail.com",
   phone: { display: "+91 78990 57199", href: "tel:+917899057199" },
   github: "https://github.com/ChaitanyaVootla",
@@ -42,27 +42,27 @@ export const site = {
 
 export const facts = [
   { value: "10+", label: "Years writing software" },
-  { value: "Agents", label: "Where my time goes" },
-  { value: "Clinical trials", label: "Day job" },
+  { value: "Agents", label: "What I build" },
+  { value: "Clinical trials", label: "Where they run" },
   { value: "Product systems", label: "Where I’m strongest" },
 ] as const;
 
 export const focus = {
   eyebrow: "What I work on",
-  heading: "Three things, in this order.",
-  lede: "Agent harnesses are where I spend my evenings and a lot of my Faeth time. Clinical-trial apps are the day job. Underneath both, ten years of normal full-stack product work.",
+  heading: "One job, three layers.",
+  lede: "At Faeth I build agents for clinical trials. The harness is the engineering, the trial is the domain, and ten years of ordinary full-stack product work is what both stand on.",
   items: [
     {
       title: "Agent harnesses",
-      body: "Where I spend most of my time. Task contracts, tool boundaries, traces, evals — the scaffolding that turns a demo into something you can actually rely on. LangGraph is where I work.",
+      body: "What I build. Task contracts, tool boundaries, traces, evals — the scaffolding that turns a demo into something you can actually rely on. LangGraph is where I work.",
     },
     {
       title: "Clinical trials",
-      body: "Day job at Faeth. Trial-related apps where getting it wrong has real consequences, so the work skews toward correctness, audit trails, and not breaking things in prod.",
+      body: "Where the agents run. At Faeth they pull structure out of trial protocols and help monitor trials in near real time. Getting it wrong has real consequences, so the work skews toward correctness, audit trails, and not breaking things in prod.",
     },
     {
       title: "Full-stack",
-      body: "Ten years of product work before this — frontends, services, the cloud bits, the database underneath. Useful baseline for the agent stuff.",
+      body: "What it all stands on. Ten years of product work before this — frontends, services, the cloud bits, the database underneath. An agent is only as good as the system around it.",
     },
   ],
 } as const;
@@ -108,15 +108,15 @@ export const career = {
       from: 2025.17,
       to: null,
       kind: "current",
-      body: "Clinical-trial related applications and the internal tools around them. Healthcare-grade reliability, so a lot of the work is making sure the boring parts are actually boring.",
+      body: "AI agents for clinical trials: pulling structured metadata out of trial protocols and monitoring trials in near real time. Healthcare-grade reliability, so a lot of the work is making sure the boring parts are actually boring.",
     },
   ],
 } as const;
 
 export const agents = {
-  eyebrow: "Agents · what I’m on now",
-  heading: "This is where most of my time goes.",
-  lede: "Building the scaffolding around agents — task contracts, tool boundaries, traces, evals, the feedback loop. LangGraph is the framework I work in. It feels a lot like picking up React in 2017 — the obvious choice that just hasn’t been obvious for very long yet.",
+  eyebrow: "How I build agents",
+  heading: "The model call is the easy part.",
+  lede: "At work and on my own projects it is the same loop: task contracts, tool boundaries, traces, evals, and the feedback that ties them together. LangGraph is the framework I work in. It feels a lot like picking up React in 2017 — the obvious choice that just hasn’t been obvious for very long yet.",
   loop: ["Prompt", "Tools", "Trace", "Eval", "Patch", "Ship"],
   beliefs: [
     {
@@ -138,23 +138,60 @@ export const agents = {
   ],
 } as const;
 
-export const project = {
-  eyebrow: "What I’m building on the side",
-  heading: "TheMovieBrowser — the one I actually use every week.",
-  lede: "Started as something to scratch my own itch around finding things to watch. Now it has a real backend, real recs, and a Chrome extension. Below is the live site.",
-  name: "TheMovieBrowser.com",
-  status: "Still adding things",
-  body: "My evenings project. Movie and TV discovery with ratings from multiple sources, watch links, watchlists, custom filters, and recs backed by embeddings + vector search.",
-  capabilities: [
-    "Ratings and watch links",
-    "Custom discovery filters",
-    "Watchlist and episode tracking",
-    "Embeddings + pgvector recommendations",
+export const projects = {
+  eyebrow: "Side projects",
+  heading: "What I build when nobody is asking.",
+  lede: "TheMovieBrowser is the one I use every week. The two newer ones were designed for agents from the start: in Kosh an agent can read my portfolio but never trade, and in Pramāṇa it can propose edits but a person approves each one.",
+  featured: {
+    name: "TheMovieBrowser.com",
+    status: "Still adding things",
+    body: "Started as something to scratch my own itch around finding things to watch. Now it is movie and TV discovery with ratings from multiple sources, watch links, watchlists, custom filters, and recs backed by embeddings + vector search.",
+    capabilities: [
+      "Ratings and watch links",
+      "Custom discovery filters",
+      "Watchlist and episode tracking",
+      "Embeddings + pgvector recommendations",
+    ],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "pgvector", "LangGraph", "AWS Bedrock"],
+    url: "https://themoviebrowser.com",
+    host: "themoviebrowser.com",
+    source: "https://github.com/ChaitanyaVootla/movie-browser",
+  },
+  others: [
+    {
+      name: "Kosh",
+      tagline: "A long-term portfolio companion for Indian markets",
+      status: "Live, for my own portfolio",
+      body: "Reads my Zerodha holdings and shows what a long-term investor actually needs to see — XIRR, drawdown, the 200-day average, concentration — in a fast, mobile-first dashboard. It tracks. It never places a trade.",
+      capabilities: [
+        "Long-term signals instead of a ticker tape",
+        "MCP server, so an agent can query the portfolio and build dashboards",
+        "Read-only by design: no order ever leaves it",
+        "Runs fully offline on seeded mock data",
+      ],
+      stack: ["Next.js", "NestJS", "TypeScript", "SQLite", "Drizzle", "ECharts", "MCP"],
+      link: { href: "https://stocks.vootlachaitanya.com", label: "stocks.vootlachaitanya.com", note: "sign-in only" },
+      // Private repo. Set to the GitHub URL if it is ever made public.
+      source: null as string | null,
+    },
+    {
+      name: "Pramāṇa",
+      tagline: "Indian history, with the evidence attached",
+      status: "Early MVP, runs locally",
+      body: "A learning platform where every statement points to the exact words it rests on, in a source you can open. Where scholars disagree, you see each reading and what supports it.",
+      capabilities: [
+        "Claims tied to verbatim quotes with page, verse or edict locators",
+        "Each quote checked against an immutable snapshot of its source",
+        "Agents work over MCP and can only propose; a person approves",
+        "Spaced repetition over claims, with confidence calibration",
+      ],
+      stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle", "MCP", "FSRS", "MapLibre"],
+      link: null,
+      // Pushed to GitHub as ChaitanyaVootla/pramana but still private, so a
+      // link would 404 for visitors. Set this once the repo is public.
+      source: null as string | null,
+    },
   ],
-  stack: ["Next.js", "TypeScript", "PostgreSQL", "pgvector", "LangGraph", "AWS Bedrock"],
-  url: "https://themoviebrowser.com",
-  host: "themoviebrowser.com",
-  source: "https://github.com/ChaitanyaVootla/movie-browser",
 } as const;
 
 export const stack = {
@@ -166,6 +203,7 @@ export const stack = {
       items: [
         "LangGraph",
         "OpenAI · Anthropic APIs",
+        "MCP servers",
         "Tool contracts",
         "Eval harnesses",
         "Embeddings · vector search",
@@ -209,6 +247,6 @@ export const nav = [
   { href: "#work", label: "Work" },
   { href: "#timeline", label: "Timeline" },
   { href: "#agents", label: "Agents" },
-  { href: "#project", label: "Project" },
+  { href: "#projects", label: "Projects" },
   { href: "#stack", label: "Stack" },
 ] as const;

@@ -4,12 +4,12 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   axes: ["opsz", "wdth"],
   variable: "--font-display",
   display: "swap",
 });
-const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+const sans = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-sans", display: "swap" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
