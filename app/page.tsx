@@ -285,67 +285,88 @@ export default function Home() {
             <LivePreview url={tmb.url} host={tmb.host} title={`Live preview of ${tmb.name}`} />
           </div>
 
-          <div className="wrap others">
-            {projects.others.map((other) => (
-              <article key={other.name} className="other reveal">
-                <figure className="shot">
-                  <a
-                    href={`${other.shot.src}-1600.webp`}
-                    target="_blank"
-                    rel="noopener"
-                    aria-label={`Open the ${other.name} screenshot at full size`}
-                  >
-                    <img
-                      src={`${other.shot.src}-1600.webp`}
-                      srcSet={`${other.shot.src}-800.webp 800w, ${other.shot.src}-1600.webp 1600w`}
-                      sizes="(max-width: 48rem) 100vw, 46vw"
-                      width={1600}
-                      height={1000}
-                      alt={other.shot.alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                  <figcaption>{other.shot.caption}</figcaption>
-                </figure>
-                <p className="status">
-                  {/* Pulsing dot: deployed and running. Hollow dot: not online yet. */}
-                  <span className={other.link ? "live-dot" : "live-dot live-dot--idle"} aria-hidden="true" />
-                  {other.status}
-                </p>
-                <h3 className="project__name">{other.name}</h3>
-                <p className="other__tagline">{other.tagline}</p>
-                <p className="project__body">{other.body}</p>
-                <ul className="ticks">
-                  {other.capabilities.map((capability) => (
-                    <li key={capability}>{capability}</li>
-                  ))}
-                </ul>
-                <ul className="chips" aria-label="Stack">
-                  {other.stack.map((tech) => (
-                    <li key={tech}>{tech}</li>
-                  ))}
-                </ul>
-                {(other.link || other.source) && (
-                  <p className="other__link">
-                    {other.link && (
-                      <a className="btn btn--ghost" href={other.link.href} target="_blank" rel="noopener">
-                        {other.link.label}
-                        <Arrow dir="up-right" />
-                      </a>
-                    )}
-                    {other.source && (
-                      <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener">
-                        GitHub
-                        <Arrow dir="up-right" />
-                      </a>
-                    )}
-                    {other.link && <span>{other.link.note}</span>}
-                  </p>
-                )}
-              </article>
-            ))}
-          </div>
+          {projects.others.map((other) => (
+            <div key={other.name} className="project-next">
+              <div className="wrap section__grid section__grid--plain">
+                <div className="section__body">
+                  <div className="project reveal">
+                    <div className="project__main">
+                      <p className="status">
+                        {/* Pulsing dot: deployed and running. Hollow dot: not online yet. */}
+                        <span className={other.link ? "live-dot" : "live-dot live-dot--idle"} aria-hidden="true" />
+                        {other.status}
+                      </p>
+                      <h3 className="project__name">{other.name}</h3>
+                      <p className="project__tagline">{other.tagline}</p>
+                      <p className="project__body">{other.body}</p>
+                      {(other.link || other.source) && (
+                        <div className="actions">
+                          {other.link && (
+                            <a className="btn" href={other.link.href} target="_blank" rel="noopener">
+                              Visit site
+                              <Arrow dir="up-right" />
+                            </a>
+                          )}
+                          {other.source && (
+                            <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener">
+                              GitHub
+                              <Arrow dir="up-right" />
+                            </a>
+                          )}
+                          {other.link && <span className="project__note">{other.link.note}</span>}
+                        </div>
+                      )}
+                    </div>
+                    <div className="project__side">
+                      <ul className="ticks">
+                        {other.capabilities.map((capability) => (
+                          <li key={capability}>{capability}</li>
+                        ))}
+                      </ul>
+                      <ul className="chips" aria-label="Stack">
+                        {other.stack.map((tech) => (
+                          <li key={tech}>{tech}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <figure className="wrap project__preview shot reveal">
+                <div className="browser">
+                  <div className="browser__bar">
+                    <span className="browser__dots" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    <span className="browser__url">{other.link ? other.link.label : other.name}</span>
+                    <a
+                      className="browser__open"
+                      href={`${other.shot.src}-2400.webp`}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Full size
+                      <Arrow dir="up-right" />
+                    </a>
+                  </div>
+                  <img
+                    src={`${other.shot.src}-1600.webp`}
+                    srcSet={`${other.shot.src}-800.webp 800w, ${other.shot.src}-1600.webp 1600w, ${other.shot.src}-2400.webp 2400w`}
+                    sizes="(max-width: 90rem) 94vw, 1344px"
+                    width={2400}
+                    height={1500}
+                    alt={other.shot.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption>{other.shot.caption}</figcaption>
+              </figure>
+            </div>
+          ))}
         </section>
 
         <section className="section" id="stack">

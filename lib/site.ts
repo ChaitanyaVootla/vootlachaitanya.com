@@ -163,7 +163,7 @@ export const projects = {
       tagline: "A long-term portfolio companion for Indian markets",
       // Captured from the app running on its seeded demo fixtures, never real holdings.
       shot: {
-        src: "/images/kosh",
+        src: "/images/shots/kosh",
         alt: "Kosh holdings table: each stock with its weight, value, one-year sparkline, profit, XIRR, drawdown, distance from the 52-week high, 200-day average signal and a watch status",
         caption: "The holdings view, running on demo data",
       },
@@ -184,7 +184,7 @@ export const projects = {
       name: "Pramāṇa",
       tagline: "Indian history, with the evidence attached",
       shot: {
-        src: "/images/pramana",
+        src: "/images/shots/pramana",
         alt: "Pramāṇa page on the Maurya Empire: a plain-language summary beside a photo of the Lion Capital of Aśoka, with a map of the empire in 252 BCE and a timeline of its rulers",
         caption: "The page on the Maurya Empire",
       },

@@ -2,32 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Frame = { width: number; height: number; scale: number };
-
-// The site is rendered at a real viewport size and scaled down to fit, so the
-// preview shows the actual layout rather than a squeezed one. Narrow screens
-// get the phone layout, wide screens the desktop one.
-const DESKTOP = { width: 1440, height: 900 };
-const PHONE = { width: 430, height: 780 };
-
+// The embedded site is shown at its real size, one CSS pixel per pixel. It is
+// responsive, so it simply lays itself out for whatever width the frame has.
+// (An earlier version rendered it at 1440px and scaled it down with a CSS
+// transform, which made the text small and soft.)
 export function LivePreview({ url, host, title }: { url: string; host: string; title: string }) {
   const view = useRef<HTMLDivElement>(null);
-  const [frame, setFrame] = useState<Frame | null>(null);
   const [near, setNear] = useState(false);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
     const el = view.current;
     if (!el) return;
-
-    const measure = () => {
-      const available = el.clientWidth;
-      const size = available < 560 ? PHONE : DESKTOP;
-      setFrame({ ...size, scale: available / size.width });
-    };
-    measure();
-    const resize = new ResizeObserver(measure);
-    resize.observe(el);
 
     // Only start loading the other site once the reader is getting close.
     const visible = new IntersectionObserver(
@@ -40,11 +26,7 @@ export function LivePreview({ url, host, title }: { url: string; host: string; t
       { rootMargin: "800px 0px" },
     );
     visible.observe(el);
-
-    return () => {
-      resize.disconnect();
-      visible.disconnect();
-    };
+    return () => visible.disconnect();
   }, []);
 
   return (
@@ -66,26 +48,18 @@ export function LivePreview({ url, host, title }: { url: string; host: string; t
           </svg>
         </a>
       </div>
-      <div
-        ref={view}
-        className="browser__view"
-        style={frame ? { height: Math.round(frame.height * frame.scale) } : undefined}
-        onMouseLeave={() => setActive(false)}
-      >
+      <div ref={view} className="browser__view" onMouseLeave={() => setActive(false)}>
         <div className="browser__placeholder" aria-hidden="true">
           <span>{host}</span>
         </div>
-        {frame && near && (
+        {near && (
           <iframe
             src={url}
             title={title}
-            width={frame.width}
-            height={frame.height}
             loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             tabIndex={active ? 0 : -1}
-            style={{ transform: `scale(${frame.scale})` }}
           />
         )}
         {!active && (
