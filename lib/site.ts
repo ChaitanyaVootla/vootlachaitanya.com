@@ -141,7 +141,7 @@ export const agents = {
 export const projects = {
   eyebrow: "Side projects",
   heading: "What I build when nobody is asking.",
-  lede: "TheMovieBrowser is the one I use every week. The two newer ones were designed for agents from the start: in Kosh an agent can read my portfolio but never trade, and in Pramāṇa it can propose edits but a person approves each one.",
+  lede: "TheMovieBrowser is the one I use every week. The two newer ones were designed for agents from the start: in Kosh an agent can read my portfolio but never trade, and in Pramāṇa every edit it makes is a proposal that gets reviewed and logged before anything changes.",
   featured: {
     name: "TheMovieBrowser.com",
     status: "Still adding things",
@@ -177,19 +177,17 @@ export const projects = {
     {
       name: "Pramāṇa",
       tagline: "Indian history, with the evidence attached",
-      status: "Early MVP, runs locally",
+      status: "Live: open to read, sign in to keep notes and cards",
       body: "A learning platform where every statement points to the exact words it rests on, in a source you can open. Where scholars disagree, you see each reading and what supports it.",
       capabilities: [
         "Claims tied to verbatim quotes with page, verse or edict locators",
         "Each quote checked against an immutable snapshot of its source",
-        "Agents work over MCP and can only propose; a person approves",
+        "Agents work over MCP; every edit is a reviewed, logged proposal",
         "Spaced repetition over claims, with confidence calibration",
       ],
       stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle", "MCP", "FSRS", "MapLibre"],
-      link: null,
-      // Pushed to GitHub as ChaitanyaVootla/pramana but still private, so a
-      // link would 404 for visitors. Set this once the repo is public.
-      source: null as string | null,
+      link: { href: "https://pramana.vootlachaitanya.com", label: "pramana.vootlachaitanya.com", note: "open to read" },
+      source: "https://github.com/ChaitanyaVootla/pramana" as string | null,
     },
   ],
 } as const;
