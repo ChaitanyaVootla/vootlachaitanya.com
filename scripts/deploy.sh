@@ -49,12 +49,19 @@ sync() {
 }
 
 # 1. Fingerprinted build assets never change under the same name: cache for a year.
-sync "public, max-age=31536000, immutable" --exclude "*" --include "_next/static/*"
+#    Fonts get an explicit type for the same reason as WebP below.
+forever="public, max-age=31536000, immutable"
+sync "$forever" --exclude "*" --include "_next/static/*.woff2" --content-type "font/woff2"
+sync "$forever" --exclude "*" --include "_next/static/*" --exclude "*.woff2"
 
 # 2. Images and the resume keep their names when they change, so the cache is short.
-sync "public, max-age=3600, s-maxage=86400" \
+#    WebP goes first with an explicit type: the AWS CLI on Windows does not
+#    know the extension and would upload it as binary/octet-stream.
+media="public, max-age=3600, s-maxage=86400"
+sync "$media" --exclude "*" --include "images/*.webp" --content-type "image/webp"
+sync "$media" \
   --exclude "*" --include "images/*" --include "*.pdf" --include "*.svg" --include "*.ico" \
-  --exclude "_next/static/*"
+  --exclude "_next/static/*" --exclude "*.webp"
 
 # 3. Text for agents and crawlers. The type and charset are set by hand:
 #    S3 does not know .md, and without a charset the dashes turn to mojibake.

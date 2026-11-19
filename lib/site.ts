@@ -161,6 +161,12 @@ export const projects = {
     {
       name: "Kosh",
       tagline: "A long-term portfolio companion for Indian markets",
+      // Captured from the app running on its seeded demo fixtures, never real holdings.
+      shot: {
+        src: "/images/kosh",
+        alt: "Kosh holdings table: each stock with its weight, value, one-year sparkline, profit, XIRR, drawdown, distance from the 52-week high, 200-day average signal and a watch status",
+        caption: "The holdings view, running on demo data",
+      },
       status: "Live, for my own portfolio",
       body: "Reads my Zerodha holdings and shows what a long-term investor actually needs to see — XIRR, drawdown, the 200-day average, concentration — in a fast, mobile-first dashboard. It tracks. It never places a trade.",
       capabilities: [
@@ -177,6 +183,11 @@ export const projects = {
     {
       name: "Pramāṇa",
       tagline: "Indian history, with the evidence attached",
+      shot: {
+        src: "/images/pramana",
+        alt: "Pramāṇa page on the Maurya Empire: a plain-language summary beside a photo of the Lion Capital of Aśoka, with a map of the empire in 252 BCE and a timeline of its rulers",
+        caption: "The page on the Maurya Empire",
+      },
       status: "Live: open to read, sign in to keep notes and cards",
       body: "A learning platform where every statement points to the exact words it rests on, in a source you can open. Where scholars disagree, you see each reading and what supports it.",
       capabilities: [

@@ -288,6 +288,26 @@ export default function Home() {
           <div className="wrap others">
             {projects.others.map((other) => (
               <article key={other.name} className="other reveal">
+                <figure className="shot">
+                  <a
+                    href={`${other.shot.src}-1600.webp`}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`Open the ${other.name} screenshot at full size`}
+                  >
+                    <img
+                      src={`${other.shot.src}-1600.webp`}
+                      srcSet={`${other.shot.src}-800.webp 800w, ${other.shot.src}-1600.webp 1600w`}
+                      sizes="(max-width: 48rem) 100vw, 46vw"
+                      width={1600}
+                      height={1000}
+                      alt={other.shot.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                  <figcaption>{other.shot.caption}</figcaption>
+                </figure>
                 <p className="status">
                   {/* Pulsing dot: deployed and running. Hollow dot: not online yet. */}
                   <span className={other.link ? "live-dot" : "live-dot live-dot--idle"} aria-hidden="true" />

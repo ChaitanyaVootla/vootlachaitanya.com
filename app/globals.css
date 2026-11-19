@@ -906,9 +906,28 @@ h2 {
   margin-top: clamp(3.5rem, 7vw, 6rem);
 }
 
-.other {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line-strong);
+/* Each one leads with a screenshot, so the frame replaces the top rule. */
+.shot img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.6rem;
+  background: var(--bg-raise);
+}
+
+.shot a {
+  display: block;
+  cursor: zoom-in;
+}
+
+.shot figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--fg-3);
+}
+
+.other .status {
+  margin-top: 1.75rem;
 }
 
 .other__tagline {
