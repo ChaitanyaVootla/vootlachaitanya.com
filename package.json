@@ -7,7 +7,8 @@
     "build": "next build",
     "preview": "npx --yes serve@14 out -l 3000",
     "typecheck": "tsc --noEmit",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "bash scripts/deploy.sh",
+    "resume": "bash scripts/build-resume.sh"
   },
   "dependencies": {
     "next": "^16.4.6",

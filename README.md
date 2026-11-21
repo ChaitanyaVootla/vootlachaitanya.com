@@ -21,6 +21,7 @@ npm run dev        # http://localhost:3000
 | `npm run preview`   | Serve `out/` locally, exactly as it will be deployed    |
 | `npm run typecheck` | TypeScript check                                        |
 | `npm run deploy`    | Upload `out/` to S3 and refresh CloudFront (see below)  |
+| `npm run resume`    | Compile `resume/resume.tex` into `public/Resume.pdf`    |
 
 ## Where things live
 
@@ -34,6 +35,7 @@ npm run dev        # http://localhost:3000
 | `app/llms*.txt/route.ts`   | `llms.txt` and `llms-full.txt`, generated from `lib/site.ts`                           |
 | `components/`              | The three interactive bits: theme toggle, copy-email button, live project preview      |
 | `public/`                  | Portrait and `Resume.pdf`                                                              |
+| `resume/resume.tex`        | Source of the resume. Self-contained LaTeX; `npm run resume` needs Tectonic, or use Overleaf |
 | `legacy/`                  | The 2022 version of the site, kept for reference. Not built or deployed.               |
 
 ## Hosting
