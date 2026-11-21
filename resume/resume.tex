@@ -9,6 +9,11 @@
 
 \documentclass[10pt,letterpaper]{article}
 
+% Body size. 11pt fills two pages almost exactly (page two is about 93% full).
+% If a future edit spills onto a third page, trim a line or step this down a
+% little (10.7pt, 10.5pt) rather than shrinking the margins.
+\usepackage[fontsize=11pt]{fontsize}
+
 %----------------------------------------------------------------------------------------
 %   PACKAGES
 %----------------------------------------------------------------------------------------
@@ -52,7 +57,8 @@
 \widowpenalty=10000
 
 \setlist[itemize]{label=\textbullet, leftmargin=1.15em, labelsep=0.5em,
-  topsep=2.5pt, itemsep=1.5pt, parsep=0pt, partopsep=0pt}
+  topsep=3pt, itemsep=2pt, parsep=0pt, partopsep=0pt,
+  beginpenalty=10000, midpenalty=10000} % a job or project never splits across pages
 
 % \rsection{Title}
 \newcommand{\rsection}[1]{%
@@ -93,8 +99,7 @@
   \item Staff engineer with ten years of full-stack product engineering, now building AI agents and the
         systems around them for clinical trials at Faeth Therapeutics.
   \item Before that, built CI/CD and artifact-management products at Shippable, an early-stage startup,
-        and at JFrog after it acquired Shippable. Strong in system design, cloud architecture, data
-        structures and algorithms.
+        and at JFrog after it acquired Shippable. Strong in system design and cloud architecture.
   \item I also build and run my own products; see
         \href{https://vootlachaitanya.com}{vootlachaitanya.com} and
         \href{https://themoviebrowser.com}{TheMovieBrowser.com}.
@@ -106,8 +111,8 @@
 
 \rsection{Technical Strengths}
 \renewcommand{\arraystretch}{1.22}
-\begin{tabular}{@{}>{\bfseries}p{1.32in}@{\hspace{1.5em}}p{5.55in}@{}}
-  AI and Agents  & LangGraph, OpenAI and Anthropic APIs, MCP, RAG, embeddings and vector search, evals \\
+\begin{tabular}{@{}>{\bfseries}p{1.5in}@{\hspace{1em}}p{5.4in}@{}}
+  AI and Agents  & LangGraph, OpenAI and Anthropic APIs, MCP, RAG, vector search, evals \\
   Languages      & TypeScript, JavaScript, Java, HTML5, CSS3 \\
   Frontend       & React, Next.js, Vue.js, Nuxt, AngularJS, D3.js \\
   Backend        & Node.js, NestJS, REST and WebSocket services, RabbitMQ \\
@@ -124,8 +129,7 @@
 
 \entry{Faeth Therapeutics}{Mar 2025 -- Present}{Staff Software Engineer}
 \begin{itemize}
-  \item Architecting a new approach to monitoring clinical trials in near real time, to get more value
-        out of clinical data.
+  \item Architecting near-real-time monitoring of clinical trials, to get more value out of clinical data.
   \item Designed and built an AI-powered system that extracts structured metadata from clinical trial
         protocols, unlocking deeper insight across both active and legacy studies.
   \item Build the agent harness behind this work in LangGraph: task contracts, tool boundaries, traces
@@ -134,8 +138,8 @@
 
 \entry{JFrog}{Apr 2023 -- Feb 2025}{Senior Software Engineer, Artifactory}
 \begin{itemize}
-  \item Designed and built scalable artifact cleanup and archival systems in Java, highly concurrent
-        at enterprise scale.
+  \item Designed and implemented scalable artifact cleanup and archival systems in Java, with
+        high-performance concurrency for enterprise-scale use cases.
   \item Worked across front end, API and back end to deliver end-to-end features for a highly
         available system.
   \item Mentored and led junior engineers through the team's move between products, building a team
@@ -186,7 +190,7 @@
   \item Began as an internal tool for The Movie Browser; now a free project that lets developers use
         TMDB images with just a TMDB or IMDb ID, with no API calls.
   \item Built on AWS and GitHub Actions, with storage and CDN strategies that keep costs low and
-        global access fast.
+        access fast.
 \end{itemize}
 
 \entry{Kosh}{\href{https://stocks.vootlachaitanya.com}{stocks.vootlachaitanya.com}}{}
