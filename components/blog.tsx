@@ -3,7 +3,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { blogPath, formatDate, postPath, type Post } from "@/lib/blog";
 import { site, writing } from "@/lib/site";
 
-// Shared pieces of the blog pages and the home page's "Latest writing".
+// Shared pieces of the blog pages and the home page's "Latest from the blog".
 
 export const feedPath = `${blogPath}rss.xml`;
 
@@ -11,7 +11,7 @@ const links = [
   { href: "/#work", label: "Work" },
   { href: "/#agents", label: "Agents" },
   { href: "/#projects", label: "Projects" },
-  { href: blogPath, label: "Writing" },
+  { href: blogPath, label: "Blog" },
 ] as const;
 
 // The same top bar as the home page; its links lead back into the home page.

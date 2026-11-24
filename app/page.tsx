@@ -4,7 +4,7 @@ import { PostList } from "@/components/blog";
 import { CopyEmail } from "@/components/copy-email";
 import { LivePreview } from "@/components/live-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { blogPath, getPosts } from "@/lib/blog";
+import { blogPath, getPosts, postPath, type Post } from "@/lib/blog";
 import { agentPrompt } from "@/lib/llms";
 import { agents, career, contact, facts, focus, machine, nav, projects, site, stack, writing } from "@/lib/site";
 
@@ -38,7 +38,7 @@ function SectionHead({ index, label }: { index: number; label: string }) {
 type Entry = typeof projects.lead | (typeof projects.others)[number];
 
 // One project: its details, then a full-width browser frame with a screenshot.
-function ProjectEntry({ other, first = false }: { other: Entry; first?: boolean }) {
+function ProjectEntry({ other, first = false, posts = [] }: { other: Entry; first?: boolean; posts?: Post[] }) {
   return (
     <div className={first ? "project-next project-next--first" : "project-next"}>
       <div className="wrap section__grid section__grid--plain">
@@ -53,6 +53,18 @@ function ProjectEntry({ other, first = false }: { other: Entry; first?: boolean 
               <h3 className="project__name">{other.name}</h3>
               <p className="project__tagline">{other.tagline}</p>
               <p className="project__body">{other.body}</p>
+              {posts.length > 0 && (
+                <ul className="project__posts">
+                  {posts.map((post) => (
+                    <li key={post.slug}>
+                      <a href={postPath(post.slug)}>
+                        <span>Write-up</span>
+                        {post.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
               {(other.link || other.source) && (
                 <div className="actions">
                   {other.link && (
@@ -132,10 +144,14 @@ export default function Home() {
   const today = new Date();
   const now = today.getFullYear() + today.getMonth() / 12;
 
-  // The Writing link is always there; "Latest writing" appears once something is published.
-  const latest = getPosts().slice(0, 3);
-  const links = [...nav, { href: blogPath, label: "Writing" }];
-  // Section numbers stay consecutive whether or not the writing section is shown.
+  // The Blog link is always there and comes first. The newest posts are shown
+  // at the top of the page once something is published.
+  const posts = getPosts();
+  const latest = posts.slice(0, 3);
+  const newest = latest[0];
+  const about = (name: string) => posts.filter((post) => post.projects.includes(name));
+  const links = [{ href: blogPath, label: "Blog" }, ...nav];
+  // Section numbers stay consecutive whether or not the blog section is shown.
   let section = 0;
   const nextSection = () => ++section;
 
@@ -158,7 +174,7 @@ export default function Home() {
           </a>
           <nav className="top__nav" aria-label="Sections">
             {links.map((item) => (
-              <a key={item.href} href={item.href}>
+              <a key={item.href} href={item.href} data-blog={item.href === blogPath ? "" : undefined}>
                 {item.label}
               </a>
             ))}
@@ -184,6 +200,13 @@ export default function Home() {
       <main id="main">
         <section className="hero" id="top">
           <div className="wrap">
+            {newest && (
+              <a className="latest" href={postPath(newest.slug)} data-umami-event="latest-post" data-umami-event-post={newest.slug}>
+                <span className="latest__tag">New on the blog</span>
+                <span className="latest__title">{newest.title}</span>
+                <Arrow dir="right" />
+              </a>
+            )}
             <p className="hero__kicker">
               <span className="live-dot" aria-hidden="true" />
               <span>{site.role}</span>
@@ -235,7 +258,7 @@ export default function Home() {
                     <Arrow dir="up-right" />
                   </a>
                   <a className="btn btn--ghost btn--lg" href="#projects">
-                    See side projects
+                    See projects
                     <Arrow dir="down" />
                   </a>
                 </div>
@@ -252,6 +275,23 @@ export default function Home() {
           </div>
         </section>
 
+        {latest.length > 0 && (
+          <section className="section" id="blog">
+            <div className="wrap section__grid">
+              <SectionHead index={nextSection()} label={writing.latest} />
+              <div className="section__body">
+                <h2 className="reveal">{writing.heading}</h2>
+                <PostList posts={latest} level="h3" />
+                <div className="actions writing__more reveal">
+                  <a className="btn btn--ghost" href={blogPath}>
+                    All posts
+                    <Arrow dir="right" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
         <section className="section" id="work">
           <div className="wrap section__grid">
             <SectionHead index={nextSection()} label={focus.eyebrow} />
@@ -354,23 +394,6 @@ export default function Home() {
           </div>
         </section>
 
-        {latest.length > 0 && (
-          <section className="section" id="writing">
-            <div className="wrap section__grid">
-              <SectionHead index={nextSection()} label={writing.latest} />
-              <div className="section__body">
-                <h2 className="reveal">{writing.heading}</h2>
-                <PostList posts={latest} level="h3" />
-                <div className="actions writing__more reveal">
-                  <a className="btn btn--ghost" href={blogPath}>
-                    All writing
-                    <Arrow dir="right" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
         <section className="section" id="projects">
           <div className="wrap section__grid">
             <SectionHead index={nextSection()} label={projects.eyebrow} />
@@ -380,7 +403,7 @@ export default function Home() {
 
             </div>
           </div>
-          <ProjectEntry other={projects.lead} first />
+          <ProjectEntry other={projects.lead} first posts={about(projects.lead.name)} />
           <div className="project-next">
             <div className="wrap section__grid section__grid--plain">
               <div className="section__body">
@@ -423,7 +446,7 @@ export default function Home() {
             </div>
           </div>
           {projects.others.map((other) => (
-            <ProjectEntry key={other.name} other={other} />
+            <ProjectEntry key={other.name} other={other} posts={about(other.name)} />
           ))}
         </section>
 
@@ -515,6 +538,8 @@ export default function Home() {
             © {today.getFullYear()} {site.name}
           </p>
           <p className="foot__links">
+            <a href={blogPath}>Blog</a>
+            <a href={`${blogPath}rss.xml`}>RSS</a>
             <a href="/llms.txt">llms.txt</a>
             <a href="/index.md">Markdown</a>
             <a href="#top">

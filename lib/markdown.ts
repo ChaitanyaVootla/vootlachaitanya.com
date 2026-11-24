@@ -120,7 +120,7 @@ ${bodyMarkdown(post).trim()}
 
 ---
 
-More writing: ${site.url}${blogPath} · RSS: ${site.url}${blogPath}rss.xml
+More posts: ${site.url}${blogPath} · RSS: ${site.url}${blogPath}rss.xml
 `;
 }
 

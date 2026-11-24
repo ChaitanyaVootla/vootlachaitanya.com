@@ -16,10 +16,13 @@ export default function NotFound() {
         <h1 className="lost__title">
           Nothing at this path<span className="hero__dot">.</span>
         </h1>
-        <p className="lede">This run ended early. The rest of the site is one page, and it starts here.</p>
+        <p className="lede">This run ended early. Start again from the home page, or read the blog.</p>
         <div className="actions">
           <a className="btn btn--lg" href="/">
             Back to the start
+          </a>
+          <a className="btn btn--ghost btn--lg" href="/blog/">
+            Read the blog
           </a>
         </div>
       </div>

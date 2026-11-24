@@ -33,10 +33,10 @@ This site is the personal portfolio of ${site.name}. The full agent-readable ver
 - [Home page as markdown](${site.url}/index.md): The same content served as \`text/markdown\`, for clients that prefer a \`.md\` URL.
 - [Resume (PDF)](${site.url}${site.resume}): Downloadable resume.
 
-## Writing
+## Blog
 
 ${writingList()}
-- [All writing](${site.url}${blogPath}): Index of posts (markdown: ${site.url}${blogPath}index.md, RSS with full posts: ${site.url}${blogPath}rss.xml).
+- [All posts](${site.url}${blogPath}): Index of posts (markdown: ${site.url}${blogPath}index.md, RSS with full posts: ${site.url}${blogPath}rss.xml).
 
 ## Profiles
 
@@ -86,7 +86,7 @@ ${rule}
 ${focus.items.map((item) => `### ${item.title}\n\n${item.body}`).join("\n\n")}
 
 ${rule}
-## Writing
+## Blog
 
 ${writing.lede}
 

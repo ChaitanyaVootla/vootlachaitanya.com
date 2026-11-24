@@ -108,7 +108,7 @@ export default async function PostPage({ params }: Props) {
               <span className="hero__slash" aria-hidden="true">
                 /
               </span>
-              <a href="/blog/">Writing</a>
+              <a href="/blog/">Blog</a>
               {post.draft && <span className="post__draft">Draft</span>}
             </p>
             <h1 className="post__title">
@@ -150,6 +150,20 @@ export default async function PostPage({ params }: Props) {
                     </dd>
                   </div>
                 )}
+                {post.projects.length > 0 && (
+                  <div>
+                    <dt>About</dt>
+                    <dd>
+                      <ul className="chips" aria-label="Projects">
+                        {post.projects.map((name) => (
+                          <li key={name}>
+                            <a href="/#projects">{name}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                )}
               </dl>
               {showToc && (
                 <nav className="toc" aria-labelledby="toc-label">
@@ -173,6 +187,26 @@ export default async function PostPage({ params }: Props) {
               </div>
 
               <footer className="post__foot">
+                {/* Most readers arrive from a link and have never seen the home page. */}
+                <div className="author">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={site.portrait.src} alt="" width={56} height={56} loading="lazy" decoding="async" />
+                  <div>
+                    <p className="author__name">Written by {site.name}</p>
+                    <p className="author__bio">{site.summary}</p>
+                    <p className="author__links">
+                      <a href="/">About me</a>
+                      <a href="/#projects">Projects</a>
+                      <a href={site.github} target="_blank" rel="noopener" data-umami-event="profile-click" data-umami-event-profile="github">
+                        GitHub
+                      </a>
+                      <a href={site.linkedin} target="_blank" rel="noopener" data-umami-event="profile-click" data-umami-event-profile="linkedin">
+                        LinkedIn
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
                 {post.linkedin && (
                   <div className="post__discuss">
                     <p>Questions, disagreements, war stories: the conversation about this one is on LinkedIn.</p>
@@ -193,7 +227,7 @@ export default async function PostPage({ params }: Props) {
                 <Subscribe source={post.slug} />
 
                 {(newer || older) && (
-                  <nav className="pager" aria-label="More writing">
+                  <nav className="pager" aria-label="More posts">
                     {newer ? (
                       <a className="pager__link" href={postPath(newer.slug)}>
                         <span className="pager__dir">

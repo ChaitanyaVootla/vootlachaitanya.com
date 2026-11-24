@@ -74,10 +74,10 @@ export const focus = {
 } as const;
 
 export const writing = {
-  eyebrow: "Writing",
+  eyebrow: "Blog",
   heading: "Notes from the harness.",
   lede: "Long-form write-ups on building agents: the contracts, tools, traces and evals around the model, and what breaks once it runs for real.",
-  latest: "Latest writing",
+  latest: "Latest from the blog",
   latestHeading: "Recent write-ups.",
   empty: "The first write-up is coming soon.",
   subscribe: {
@@ -290,7 +290,7 @@ export const machine = {
     { href: "/llms.txt", note: "Index of the machine-readable pages" },
     { href: "/llms-full.txt", note: "The whole site as one markdown document" },
     { href: "/index.md", note: "The same document, served as text/markdown" },
-    { href: "/blog/rss.xml", note: "Writing, every post in full, as RSS" },
+    { href: "/blog/rss.xml", note: "The blog, every post in full, as RSS" },
     { href: "/robots.txt", note: "Crawlers and agents are all welcome" },
     { href: "/sitemap.xml", note: "Sitemap" },
   ],

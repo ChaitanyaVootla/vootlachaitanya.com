@@ -55,6 +55,7 @@ description: One or two sentences. Used for the index, search results, share car
 date: 2026-12-01            # ISO date, required
 updated: 2026-12-08         # optional; becomes dateModified and the sitemap's lastmod
 tags: [agents, harness]     # optional
+projects: [Kosh, Pramāṇa]   # optional; project names as in lib/site.ts. Links the post and the project to each other
 draft: true                 # optional; leave out (or false) to publish
 linkedin: https://www.linkedin.com/feed/update/urn:li:activity:…   # optional; adds "Discuss on LinkedIn"
 ---
@@ -71,7 +72,13 @@ Start with a paragraph. The title is the page's only h1, so headings in the post
   three components: `<Callout title="…">` (or `tone="warning"`), `<Figure src alt caption width height />`
   and `<Diagram title="…" caption="…"><svg>…</svg></Diagram>` for inline SVG drawn with
   `currentColor` and `var(--accent)`. Posts with three or more `##` headings get a table of contents.
+  Diagrams can move without any script: give a path `className="flow__wire"` for marching dashes, put an
+  `<animateMotion>` inside a `<circle className="flow__dot">` for a travelling marker, and wrap each step of a
+  sequence in `<g className="flow__step" style={{ "--i": 0 }}>` (up to eight) to light them in turn. All of it
+  stops for readers who ask for reduced motion.
   `content/blog/writing-kit.mdx` is a draft that uses every one of them; it is there for checking the design.
+- **Where a post shows up**: the newest one is announced at the top of the home page, the newest three
+  are listed in its first section, and a post that names `projects` is linked from those project entries.
 - **Every post gets**: `/blog/<slug>/` with article metadata and `BlogPosting` JSON-LD, a share image at
   `/blog/<slug>/og.png`, a markdown twin at `/blog/<slug>/index.md`, an entry in `/blog/rss.xml` (in
   full), `sitemap.xml`, `llms.txt` and `llms-full.txt`, and a spot in "Latest writing" on the home page.

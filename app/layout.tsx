@@ -138,7 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="alternate" type="application/rss+xml" title={`${site.name} — Writing`} href="/blog/rss.xml" />
+        <link rel="alternate" type="application/rss+xml" title={`${site.name} — Blog`} href="/blog/rss.xml" />
         {umami && <script defer src={umami.src} data-website-id={umami.websiteId} data-domains={umami.domains} />}
       </head>
       <body>{children}</body>

@@ -53,7 +53,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
       >
         <div style={{ display: "flex", alignItems: "center", fontSize: 22, letterSpacing: 2.4, color: muted }}>
           <div style={{ width: 14, height: 14, borderRadius: 14, background: accent, marginRight: 18 }} />
-          {`Writing / ${formatDate(post.date)} / ${post.readingMinutes} min read`.toUpperCase()}
+          {`Blog / ${formatDate(post.date)} / ${post.readingMinutes} min read`.toUpperCase()}
         </div>
 
         <div

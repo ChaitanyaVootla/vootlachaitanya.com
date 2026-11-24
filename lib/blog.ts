@@ -17,6 +17,8 @@ export type Post = {
   date: string;
   updated?: string;
   tags: string[];
+  /** Names of the projects (as in lib/site.ts) this post is about */
+  projects: string[];
   draft: boolean;
   /** URL of the LinkedIn post where this is being discussed */
   linkedin?: string;
@@ -78,6 +80,10 @@ function readPost(file: string): Post {
   if (!Array.isArray(tags) || !tags.every((tag) => typeof tag === "string")) {
     fail(file, `"tags" must be a list of strings`);
   }
+  const about = data.projects ?? [];
+  if (!Array.isArray(about) || !about.every((name) => typeof name === "string")) {
+    fail(file, `"projects" must be a list of project names`);
+  }
   if (data.draft !== undefined && typeof data.draft !== "boolean") fail(file, `"draft" must be true or false`);
 
   const linkedin = text("linkedin", false);
@@ -91,6 +97,7 @@ function readPost(file: string): Post {
     date: isoDate(file, "date", data.date),
     updated: data.updated === undefined ? undefined : isoDate(file, "updated", data.updated),
     tags: tags as string[],
+    projects: about as string[],
     draft: data.draft === true,
     linkedin,
     readingMinutes: readingMinutes(body),
