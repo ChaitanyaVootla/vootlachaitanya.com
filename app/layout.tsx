@@ -114,18 +114,16 @@ const jsonLd = [
     inLanguage: "en",
     publisher: { "@id": `${site.url}/#person` },
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "@id": `${site.url}/#profilepage`,
-    url: site.url,
-    name: site.title,
-    description: site.description,
-    inLanguage: "en",
-    isPartOf: { "@id": `${site.url}/#website` },
-    mainEntity: { "@id": `${site.url}/#person` },
-  },
 ];
+
+// Umami, only in production builds and only once a website ID is configured.
+// data-domains keeps local previews of the build out of the numbers.
+const { analytics } = site;
+const host = new URL(site.url).hostname;
+const umami =
+  process.env.NODE_ENV === "production" && analytics.provider === "umami" && analytics.websiteId
+    ? { src: analytics.src, websiteId: analytics.websiteId, domains: `${host},www.${host}` }
+    : null;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -140,6 +138,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="alternate" type="application/rss+xml" title={`${site.name} — Writing`} href="/blog/rss.xml" />
+        {umami && <script defer src={umami.src} data-website-id={umami.websiteId} data-domains={umami.domains} />}
       </head>
       <body>{children}</body>
     </html>

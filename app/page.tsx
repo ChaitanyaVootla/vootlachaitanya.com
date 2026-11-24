@@ -1,24 +1,28 @@
 import { AgentKit } from "@/components/agent-kit";
+import { Arrow } from "@/components/arrow";
+import { PostList } from "@/components/blog";
 import { CopyEmail } from "@/components/copy-email";
 import { LivePreview } from "@/components/live-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { blogPath, getPosts } from "@/lib/blog";
 import { agentPrompt } from "@/lib/llms";
-import { agents, career, contact, facts, focus, machine, nav, projects, site, stack } from "@/lib/site";
+import { agents, career, contact, cue, facts, focus, machine, nav, projects, site, stack, writing } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-function Arrow({ dir = "up-right" }: { dir?: "up-right" | "down" | "right" }) {
-  const paths = {
-    "up-right": "M4.5 11.5l7-7M5.5 4.5h6v6",
-    down: "M8 3v10M3.5 8.5L8 13l4.5-4.5",
-    right: "M3 8h10M8.5 3.5L13 8l-4.5 4.5",
-  };
-  return (
-    <svg className="arrow" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-      <path d={paths[dir]} fill="none" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
+// The home page is the ProfilePage; the Person and WebSite it points at are
+// declared once in the layout.
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${site.url}/#profilepage`,
+  url: site.url,
+  name: site.title,
+  description: site.description,
+  inLanguage: "en",
+  isPartOf: { "@id": `${site.url}/#website` },
+  mainEntity: { "@id": `${site.url}/#person` },
+};
 
 function SectionHead({ index, label }: { index: number; label: string }) {
   return (
@@ -40,8 +44,19 @@ export default function Home() {
   const today = new Date();
   const now = today.getFullYear() + today.getMonth() / 12;
 
+  // "Latest writing" and the Writing link only appear once something is published.
+  const latest = getPosts().slice(0, 3);
+  const links = latest.length ? [...nav, { href: blogPath, label: "Writing" }] : nav;
+  // Section numbers stay consecutive whether or not the writing section is shown.
+  let section = 0;
+  const nextSection = () => ++section;
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
+      />
       <a className="skip" href="#main">
         Skip to content
       </a>
@@ -54,7 +69,7 @@ export default function Home() {
             <span className="brand__name">{site.name}</span>
           </a>
           <nav className="top__nav" aria-label="Sections">
-            {nav.map((item) => (
+            {links.map((item) => (
               <a key={item.href} href={item.href}>
                 {item.label}
               </a>
@@ -62,7 +77,12 @@ export default function Home() {
           </nav>
           <div className="top__actions">
             <ThemeToggle />
-            <a className="btn btn--ghost top__resume" href={site.resume}>
+            <a
+              className="btn btn--ghost top__resume"
+              href={site.resume}
+              data-umami-event="resume-download"
+              data-umami-event-location="header"
+            >
               Résumé
               <Arrow dir="down" />
             </a>
@@ -117,7 +137,12 @@ export default function Home() {
                   , where I build AI agents for clinical trials. Most of the work is the harness around the model.
                 </p>
                 <div className="actions">
-                  <a className="btn btn--lg" href={`mailto:${site.email}`}>
+                  <a
+                    className="btn btn--lg"
+                    href={`mailto:${site.email}`}
+                    data-umami-event="email-click"
+                    data-umami-event-location="hero"
+                  >
                     Start a conversation
                     <Arrow dir="up-right" />
                   </a>
@@ -141,7 +166,7 @@ export default function Home() {
 
         <section className="section" id="work">
           <div className="wrap section__grid">
-            <SectionHead index={1} label={focus.eyebrow} />
+            <SectionHead index={nextSection()} label={focus.eyebrow} />
             <div className="section__body">
               <h2 className="reveal">{focus.heading}</h2>
               <p className="lede reveal">{focus.lede}</p>
@@ -156,13 +181,46 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
+
+              {/* Built at work, so it lives here and not under side projects. */}
+              <div className="project cue reveal" id="cue">
+                <div className="project__main">
+                  <p className="status">
+                    <span className="live-dot" aria-hidden="true" />
+                    {cue.status}
+                  </p>
+                  <h3 className="project__name">{cue.name}</h3>
+                  <p className="project__tagline">{cue.tagline}</p>
+                  <p className="project__body">{cue.body}</p>
+                  <div className="actions">
+                    <a
+                      className="btn"
+                      href={cue.docs}
+                      target="_blank"
+                      rel="noopener"
+                      data-umami-event="outbound-project"
+                      data-umami-event-project={cue.name}
+                    >
+                      Read the docs
+                      <Arrow dir="up-right" />
+                    </a>
+                  </div>
+                </div>
+                <div className="project__side">
+                  <ul className="ticks">
+                    {cue.capabilities.map((capability) => (
+                      <li key={capability}>{capability}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="section" id="timeline">
           <div className="wrap section__grid">
-            <SectionHead index={2} label={career.eyebrow} />
+            <SectionHead index={nextSection()} label={career.eyebrow} />
             <div className="section__body">
               <h2 className="reveal">{career.heading}</h2>
               <div className="trace">
@@ -204,7 +262,7 @@ export default function Home() {
 
         <section className="section" id="agents">
           <div className="wrap section__grid">
-            <SectionHead index={3} label={agents.eyebrow} />
+            <SectionHead index={nextSection()} label={agents.eyebrow} />
             <div className="section__body">
               <h2 className="reveal">{agents.heading}</h2>
               <p className="lede reveal">{agents.lede}</p>
@@ -240,9 +298,26 @@ export default function Home() {
           </div>
         </section>
 
+        {latest.length > 0 && (
+          <section className="section" id="writing">
+            <div className="wrap section__grid">
+              <SectionHead index={nextSection()} label={writing.latest} />
+              <div className="section__body">
+                <h2 className="reveal">{writing.heading}</h2>
+                <PostList posts={latest} level="h3" />
+                <div className="actions writing__more reveal">
+                  <a className="btn btn--ghost" href={blogPath}>
+                    All writing
+                    <Arrow dir="right" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
         <section className="section" id="projects">
           <div className="wrap section__grid">
-            <SectionHead index={4} label={projects.eyebrow} />
+            <SectionHead index={nextSection()} label={projects.eyebrow} />
             <div className="section__body">
               <h2 className="reveal">{projects.heading}</h2>
               <p className="lede reveal">{projects.lede}</p>
@@ -256,11 +331,11 @@ export default function Home() {
                   <h3 className="project__name">{tmb.name}</h3>
                   <p className="project__body">{tmb.body}</p>
                   <div className="actions">
-                    <a className="btn" href={tmb.url} target="_blank" rel="noopener">
+                    <a className="btn" href={tmb.url} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={tmb.name} data-umami-event-target="site">
                       Visit site
                       <Arrow dir="up-right" />
                     </a>
-                    <a className="btn btn--ghost" href={tmb.source} target="_blank" rel="noopener">
+                    <a className="btn btn--ghost" href={tmb.source} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={tmb.name} data-umami-event-target="github">
                       GitHub
                       <Arrow dir="up-right" />
                     </a>
@@ -302,13 +377,13 @@ export default function Home() {
                       {(other.link || other.source) && (
                         <div className="actions">
                           {other.link && (
-                            <a className="btn" href={other.link.href} target="_blank" rel="noopener">
+                            <a className="btn" href={other.link.href} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={other.name} data-umami-event-target="site">
                               Visit site
                               <Arrow dir="up-right" />
                             </a>
                           )}
                           {other.source && (
-                            <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener">
+                            <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={other.name} data-umami-event-target="github">
                               GitHub
                               <Arrow dir="up-right" />
                             </a>
@@ -371,7 +446,7 @@ export default function Home() {
 
         <section className="section" id="stack">
           <div className="wrap section__grid">
-            <SectionHead index={5} label={stack.eyebrow} />
+            <SectionHead index={nextSection()} label={stack.eyebrow} />
             <div className="section__body">
               <h2 className="reveal">{stack.heading}</h2>
               <div className="stack">
@@ -395,10 +470,10 @@ export default function Home() {
 
         <section className="section" id="contact">
           <div className="wrap section__grid">
-            <SectionHead index={6} label={contact.eyebrow} />
+            <SectionHead index={nextSection()} label={contact.eyebrow} />
             <div className="section__body">
               <h2 className="contact__heading reveal">{contact.heading}</h2>
-              <a className="contact__email reveal" href={`mailto:${site.email}`}>
+              <a className="contact__email reveal" href={`mailto:${site.email}`} data-umami-event="email-click" data-umami-event-location="contact">
                 <span>{site.email}</span>
                 <Arrow dir="up-right" />
               </a>
@@ -406,20 +481,20 @@ export default function Home() {
                 <CopyEmail email={site.email} />
                 <ul className="contact__links">
                   <li>
-                    <a href={site.phone.href}>{site.phone.display}</a>
+                    <a href={site.phone.href} data-umami-event="phone-click">{site.phone.display}</a>
                   </li>
                   <li>
-                    <a href={site.github} target="_blank" rel="noopener me">
+                    <a href={site.github} target="_blank" rel="noopener me" data-umami-event="profile-click" data-umami-event-profile="github">
                       GitHub
                     </a>
                   </li>
                   <li>
-                    <a href={site.linkedin} target="_blank" rel="noopener me">
+                    <a href={site.linkedin} target="_blank" rel="noopener me" data-umami-event="profile-click" data-umami-event-profile="linkedin">
                       LinkedIn
                     </a>
                   </li>
                   <li>
-                    <a href={site.resume}>Résumé (PDF)</a>
+                    <a href={site.resume} data-umami-event="resume-download" data-umami-event-location="contact">Résumé (PDF)</a>
                   </li>
                 </ul>
               </div>
@@ -429,7 +504,7 @@ export default function Home() {
 
         <section className="section machine" id="for-ai">
           <div className="wrap section__grid">
-            <SectionHead index={7} label={machine.eyebrow} />
+            <SectionHead index={nextSection()} label={machine.eyebrow} />
             <div className="section__body">
               <h2 className="machine__heading reveal">{machine.heading}</h2>
               <p className="lede reveal">{machine.lede}</p>

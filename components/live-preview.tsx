@@ -41,7 +41,15 @@ export function LivePreview({ url, host, title }: { url: string; host: string; t
           <span className="live-dot" aria-hidden="true" />
           {host}
         </span>
-        <a className="browser__open" href={url} target="_blank" rel="noopener">
+        <a
+          className="browser__open"
+          href={url}
+          target="_blank"
+          rel="noopener"
+          data-umami-event="outbound-project"
+          data-umami-event-project={host}
+          data-umami-event-target="preview"
+        >
           Open site
           <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
             <path d="M4.5 11.5l7-7M5.5 4.5h6v6" fill="none" stroke="currentColor" strokeWidth="1.5" />

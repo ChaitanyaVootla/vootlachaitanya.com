@@ -38,6 +38,12 @@ export const site = {
     "Node.js",
     "portfolio",
   ],
+  // Subscribe block under every post. With an empty username only the RSS
+  // link is shown, so there is never a form that posts nowhere.
+  newsletter: { provider: "buttondown", username: "" as string },
+  // Umami. The script is added to production builds only, and only once a
+  // website ID is set. Clicks are counted through data-umami-event attributes.
+  analytics: { provider: "umami", websiteId: "" as string, src: "https://cloud.umami.is/script.js" },
 } as const;
 
 export const facts = [
@@ -65,6 +71,37 @@ export const focus = {
       body: "What it all stands on. Ten years of product work before this — frontends, services, the cloud bits, the database underneath. An agent is only as good as the system around it.",
     },
   ],
+} as const;
+
+// Built at Faeth as part of the day job, so it sits with "What I work on" and
+// not with the side projects. Draft copy: keep it free of numbers, dates and
+// security specifics, and don't call it open source until it is.
+export const cue = {
+  name: "Cue",
+  status: "Internal at Faeth · open source planned",
+  tagline: "An autonomous work system for the whole team.",
+  body: "I designed and built Cue at Faeth, and I still maintain it. It plugs into the tools a team already lives in, keeps a living memory of the people, projects and repos it works with, and runs agent work on a schedule or the moment someone asks. Faeth uses it internally today, and the plan is to open-source it.",
+  capabilities: [
+    "Connects to GitHub, Slack, Jira, Google Workspace and more",
+    "A living memory of people, projects and repos",
+    "Agent work on a schedule or on demand",
+    "Runs inside the organisation’s own AWS account",
+  ],
+  docs: "https://cue.faethtx.io/docs/",
+} as const;
+
+export const writing = {
+  eyebrow: "Writing",
+  heading: "Notes from the harness.",
+  lede: "Long-form write-ups on building agents: the contracts, tools, traces and evals around the model, and what breaks once it runs for real.",
+  latest: "Latest writing",
+  latestHeading: "Recent write-ups.",
+  empty: "The first write-up is coming soon.",
+  subscribe: {
+    heading: "Get the next write-up, and hear when Cue opens up.",
+    withForm: "One email when something new goes up. Unsubscribe any time.",
+    withoutForm: "There is no mailing list yet. The RSS feed has every post in full.",
+  },
 } as const;
 
 // `from`/`to` are fractional years and only position the bars on the trace;
@@ -247,6 +284,7 @@ export const machine = {
     { href: "/llms.txt", note: "Index of the machine-readable pages" },
     { href: "/llms-full.txt", note: "The whole site as one markdown document" },
     { href: "/index.md", note: "The same document, served as text/markdown" },
+    { href: "/blog/rss.xml", note: "Writing, every post in full, as RSS" },
     { href: "/robots.txt", note: "Crawlers and agents are all welcome" },
     { href: "/sitemap.xml", note: "Sitemap" },
   ],

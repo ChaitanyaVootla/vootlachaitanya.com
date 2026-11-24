@@ -1,0 +1,144 @@
+---
+title: The writing kit, every element on one page
+description: A draft that exercises every element a post can use, so the reading layout can be checked in light and dark before anything real is published.
+date: 2026-11-24
+tags: [meta, design]
+draft: true
+---
+
+This post is a fixture. It never ships: `draft: true` keeps it out of every production build unless `BLOG_DRAFTS=1` is set. It exists so that each element a write-up can use is on one page, at a realistic length, in both themes.
+
+The rest is written like a real post about agent harnesses, because layout problems only show up with real-looking text. Paragraphs should sit at a comfortable measure, around sixty-eight characters, with enough line height that a long technical argument does not feel like a wall.
+
+## Why the harness is the product
+
+Most agent demos are a model call with a nice prompt. Most agent _incidents_ are everything around it: a tool that returned half a page, a retry that ran twice, a trace nobody looked at. The harness is where that gets decided, so it is where most of the engineering goes.[^harness]
+
+There are three things I want every run to answer:
+
+1. What was the agent asked to do, exactly?
+2. Which tools did it call, with which arguments, and what came back?
+3. Did the result pass the checks we wrote down **before** the run?
+   - If yes, ship it.
+   - If no, keep the trace and turn it into an eval case.
+
+And three things I try not to do:
+
+- Let a tool return unbounded output into the context window.
+- Retry a side-effecting call without an idempotency key.
+- Judge a change by one good-looking run.
+
+> If you can’t see the runs over time, you can’t tell anyone anything about the agent. You can only tell them about the demo.
+
+### A tool contract, written down
+
+A tool is a function with a schema, a budget and an owner. The contract below is the shape I keep coming back to. It is deliberately long, so the code block has to scroll inside itself on a phone instead of pushing the page sideways.
+
+```ts
+import { z } from "zod";
+
+// One tool, described completely: what it takes, what it returns, what it may cost.
+export const searchProtocols = defineTool({
+  name: "search_protocols",
+  description: "Full-text search over trial protocols the current user can read. Returns at most `limit` passages.",
+  input: z.object({
+    query: z.string().min(3).max(200),
+    limit: z.number().int().min(1).max(20).default(8),
+    studyId: z.string().regex(/^ST-\d{4}$/).optional(),
+  }),
+  output: z.array(
+    z.object({ protocolId: z.string(), section: z.string(), passage: z.string().max(1200), score: z.number() }),
+  ),
+  budget: { timeoutMs: 4_000, maxCallsPerRun: 6, maxOutputTokens: 3_000 },
+  sideEffects: "none",
+  async run({ query, limit, studyId }, ctx) {
+    const rows = await ctx.db.searchPassages({ query, limit, studyId, readableBy: ctx.user.id });
+    ctx.trace.note("search_protocols", { query, hits: rows.length, studyId: studyId ?? null });
+    return rows.map((row) => ({ ...row, passage: truncate(row.passage, 1200) }));
+  },
+});
+```
+
+### Reading the runs
+
+Traces end up in Postgres, one row per step. This is the query I run most: the slowest tool calls in the last day, with how often they failed.
+
+```sql
+select
+  tool_name,
+  count(*)                                         as calls,
+  percentile_cont(0.95) within group (order by duration_ms) as p95_ms,
+  avg(case when status = 'error' then 1.0 else 0.0 end)     as error_rate
+from run_steps
+where kind = 'tool_call'
+  and started_at > now() - interval '1 day'
+group by tool_name
+having count(*) > 20
+order by p95_ms desc
+limit 10;
+```
+
+## The loop, drawn
+
+The same six steps as on the home page, drawn as an inline SVG. It uses `currentColor` and the accent variable, so it follows the theme switch with the rest of the page.
+
+<Diagram title="The agent loop: prompt, tools, trace, eval, patch, ship, and back to prompt" caption="The loop. Every patch comes from a trace, and every trace that teaches something becomes an eval.">
+  <svg viewBox="0 0 720 190" aria-hidden="true">
+    <g fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="10" y="40" width="96" height="56" rx="6" />
+      <rect x="128" y="40" width="96" height="56" rx="6" />
+      <rect x="246" y="40" width="96" height="56" rx="6" />
+      <rect x="364" y="40" width="96" height="56" rx="6" stroke="var(--accent)" strokeWidth="2" />
+      <rect x="482" y="40" width="96" height="56" rx="6" />
+      <rect x="600" y="40" width="96" height="56" rx="6" />
+      <path d="M106 68h22M224 68h22M342 68h22M460 68h22M578 68h22" />
+      <path d="M648 96v52H58V96" strokeDasharray="4 5" />
+      <path d="M52 104l6-8 6 8" />
+    </g>
+    <g fill="currentColor" fontSize="14" textAnchor="middle">
+      <text x="58" y="73">Prompt</text>
+      <text x="176" y="73">Tools</text>
+      <text x="294" y="73">Trace</text>
+      <text x="412" y="73" fill="var(--accent)">Eval</text>
+      <text x="530" y="73">Patch</text>
+      <text x="648" y="73">Ship</text>
+      <text x="353" y="172" fontSize="12" opacity="0.7">what shipped is what the next prompt starts from</text>
+    </g>
+  </svg>
+</Diagram>
+
+<Callout title="Why a drawing and not a screenshot">
+Inline SVG stays sharp at any size, follows the theme, and is searchable text. A screenshot of a diagram is none of those. Keep `title` on the `Diagram` component meaningful: it is what a screen reader announces.
+</Callout>
+
+## Comparing harness choices
+
+A table wider than the reading column. On a narrow screen it should scroll inside its own box.
+
+| Concern              | Bare SDK calls                 | Framework graph (LangGraph)          | Hosted agent platform          |
+| -------------------- | ------------------------------ | ------------------------------------ | ------------------------------ |
+| Control over prompts | Total                          | Total                                | Partial                        |
+| Retries and timeouts | You write them                 | Per node, declarative                | Built in, opaque               |
+| Traces               | You build them                 | Built in, exportable                 | Built in, vendor format        |
+| Evals                | Separate harness               | Separate harness, easy to wire       | Sometimes built in             |
+| Lock-in              | None                           | Low                                  | High                           |
+
+## Figures and notes
+
+Screenshots go in a `Figure`, with a caption that says what to look at, not what the image is.
+
+<Figure
+  src="/images/shots/kosh-1600.webp"
+  alt="Kosh holdings table running on demo data"
+  caption="A figure with a caption. Captions say what to notice: here, the 200-day average column on the right."
+  width={1600}
+  height={1000}
+/>
+
+<Callout tone="warning">
+A warning callout. Use it for the thing that will bite a reader who copies the code above without reading the paragraph after it: `maxCallsPerRun` is per run, not per user.
+</Callout>
+
+That is every element. If something here looks wrong in one theme and right in the other, it is a token problem in `app/globals.css`, not a post problem.
+
+[^harness]: “Harness” here means everything that is not the model: task contracts, tool boundaries, retries, traces, evals and the deploy path. The word comes from test harnesses, and the job is much the same.

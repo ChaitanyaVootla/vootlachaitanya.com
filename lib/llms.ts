@@ -1,6 +1,19 @@
-import { agents, career, focus, projects, site, stack } from "./site";
+import { blogPath, formatDate, getPosts, postUrl } from "./blog";
+import { agents, career, cue, focus, projects, site, stack, writing } from "./site";
 
 const tmb = projects.featured;
+
+// Posts for the llms files: one line each, pointing at the HTML and the markdown twin.
+function writingList(): string {
+  const posts = getPosts();
+  if (!posts.length) return `- [${writing.eyebrow}](${site.url}${blogPath}): ${writing.empty}`;
+  return posts
+    .map(
+      (p) =>
+        `- [${p.title}](${postUrl(p.slug)}) (${formatDate(p.date)}): ${p.description} Markdown: ${postUrl(p.slug)}index.md`,
+    )
+    .join("\n");
+}
 
 // Plain-text renderings of the site for agents and crawlers. They are emitted
 // at build time by the route handlers in app/llms.txt, app/llms-full.txt and
@@ -18,6 +31,15 @@ This site is the personal portfolio of ${site.name}. The full agent-readable ver
 - [Full site as markdown](${site.url}/llms-full.txt): Complete portfolio content in markdown — bio, focus areas, career, projects, skills.
 - [Home page as markdown](${site.url}/index.md): The same content served as \`text/markdown\`, for clients that prefer a \`.md\` URL.
 - [Resume (PDF)](${site.url}${site.resume}): Downloadable resume.
+
+## Writing
+
+${writingList()}
+- [All writing](${site.url}${blogPath}): Index of posts (markdown: ${site.url}${blogPath}index.md, RSS with full posts: ${site.url}${blogPath}rss.xml).
+
+## Work
+
+- [${cue.name}](${cue.docs}): ${cue.tagline} Built and maintained by ${site.givenName} at ${site.company.name}. ${cue.status}.
 
 ## Profiles
 
@@ -64,6 +86,22 @@ ${rule}
 ## What I work on
 
 ${focus.items.map((item) => `### ${item.title}\n\n${item.body}`).join("\n\n")}
+
+### ${cue.name} — built at ${site.company.name}
+
+Status: ${cue.status}. ${cue.tagline} ${cue.body}
+
+- Docs: ${cue.docs}
+- Capabilities: ${cue.capabilities.join("; ")}.
+${rule}
+## Writing
+
+${writing.lede}
+
+${writingList()}
+
+- Index: ${site.url}${blogPath} (markdown: ${site.url}${blogPath}index.md)
+- RSS, with every post in full: ${site.url}${blogPath}rss.xml
 ${rule}
 ## Beliefs about the work
 

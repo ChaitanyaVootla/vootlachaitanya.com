@@ -21,7 +21,13 @@ export function CopyEmail({ email }: { email: string }) {
   }
 
   return (
-    <button type="button" className="btn btn--ghost" onClick={copy} aria-live="polite">
+    <button
+      type="button"
+      className="btn btn--ghost"
+      onClick={copy}
+      aria-live="polite"
+      data-umami-event="email-copy"
+    >
       {copied ? "Copied" : "Copy address"}
     </button>
   );
