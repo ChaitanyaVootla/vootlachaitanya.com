@@ -1367,7 +1367,8 @@ h2 {
 }
 
 /* Cue sits under the work rows, shaped like a project. */
-.cue {
+/* The first project follows the section's lede, so it needs less air above. */
+.project-next--first {
   margin-top: clamp(3rem, 6vw, 5rem);
 }
 

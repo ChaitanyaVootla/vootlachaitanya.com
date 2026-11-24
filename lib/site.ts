@@ -73,23 +73,6 @@ export const focus = {
   ],
 } as const;
 
-// Built at Faeth as part of the day job, so it sits with "What I work on" and
-// not with the side projects. Draft copy: keep it free of numbers, dates and
-// security specifics, and don't call it open source until it is.
-export const cue = {
-  name: "Cue",
-  status: "Internal at Faeth · open source planned",
-  tagline: "An autonomous work system for the whole team.",
-  body: "I designed and built Cue at Faeth, and I still maintain it. It plugs into the tools a team already lives in, keeps a living memory of the people, projects and repos it works with, and runs agent work on a schedule or the moment someone asks. Faeth uses it internally today, and the plan is to open-source it.",
-  capabilities: [
-    "Connects to GitHub, Slack, Jira, Google Workspace and more",
-    "A living memory of people, projects and repos",
-    "Agent work on a schedule or on demand",
-    "Runs inside the organisation’s own AWS account",
-  ],
-  docs: "https://cue.faethtx.io/docs/",
-} as const;
-
 export const writing = {
   eyebrow: "Writing",
   heading: "Notes from the harness.",
@@ -176,9 +159,32 @@ export const agents = {
 } as const;
 
 export const projects = {
-  eyebrow: "Side projects",
-  heading: "What I build when nobody is asking.",
-  lede: "TheMovieBrowser is the one I use every week. The two newer ones were designed for agents from the start: in Kosh an agent can read my portfolio but never trade, and in Pramāṇa every edit it makes is a proposal that gets reviewed and logged before anything changes.",
+  eyebrow: "Projects",
+  heading: "One at work, three after hours.",
+  lede: "Cue is what I build at Faeth, and the largest thing here. The rest are evenings: TheMovieBrowser is the one I use every week, and the two newer ones were designed for agents from the start. In Kosh an agent can read my portfolio but never trade, and in Pramāṇa every edit it makes is a proposal that gets reviewed and logged before anything changes.",
+  // Built at Faeth as part of the day job. Draft copy: keep it free of numbers,
+  // dates and security specifics, and don't call it open source until it is.
+  lead: {
+    name: "Cue",
+    tagline: "An autonomous work system for the whole team",
+    // Cue's public landing page, captured in its dark theme.
+    shot: {
+      src: "/images/shots/cue",
+      alt: "Cue landing page: the headline “Cue does the work. You set the direction.” beside a chat where Cue takes a request to monitor competitor pricing, runs two researcher agents and returns a pricing table, with the tools it connects to listed below",
+      caption: "Cue’s landing page",
+    },
+    status: "Internal at Faeth · open source planned",
+    body: "I designed and built Cue at Faeth, and I still maintain it. It plugs into the tools a team already lives in, keeps a living memory of the people, projects and repos it works with, and runs agent work on a schedule or the moment someone asks. Faeth uses it internally today, and the plan is to open-source it.",
+    capabilities: [
+      "Connects to GitHub, Slack, Jira, Google Workspace and more",
+      "A living memory of people, projects and repos",
+      "Agent work on a schedule or on demand",
+      "Runs inside the organisation’s own AWS account",
+    ],
+    stack: ["TypeScript", "React", "AWS Bedrock", "DuckDB", "OpenFGA", "MCP"],
+    link: { href: "https://cue.faethtx.io", label: "cue.faethtx.io", note: "public docs, sign-in for the app" },
+    source: null as string | null,
+  },
   featured: {
     name: "TheMovieBrowser.com",
     status: "Still adding things",

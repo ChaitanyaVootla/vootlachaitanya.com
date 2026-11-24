@@ -6,7 +6,7 @@ import { LivePreview } from "@/components/live-preview";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { blogPath, getPosts } from "@/lib/blog";
 import { agentPrompt } from "@/lib/llms";
-import { agents, career, contact, cue, facts, focus, machine, nav, projects, site, stack, writing } from "@/lib/site";
+import { agents, career, contact, facts, focus, machine, nav, projects, site, stack, writing } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -35,6 +35,94 @@ function SectionHead({ index, label }: { index: number; label: string }) {
   );
 }
 
+type Entry = typeof projects.lead | (typeof projects.others)[number];
+
+// One project: its details, then a full-width browser frame with a screenshot.
+function ProjectEntry({ other, first = false }: { other: Entry; first?: boolean }) {
+  return (
+    <div className={first ? "project-next project-next--first" : "project-next"}>
+      <div className="wrap section__grid section__grid--plain">
+        <div className="section__body">
+          <div className="project reveal">
+            <div className="project__main">
+              <p className="status">
+                {/* Pulsing dot: deployed and running. Hollow dot: not online yet. */}
+                <span className={other.link ? "live-dot" : "live-dot live-dot--idle"} aria-hidden="true" />
+                {other.status}
+              </p>
+              <h3 className="project__name">{other.name}</h3>
+              <p className="project__tagline">{other.tagline}</p>
+              <p className="project__body">{other.body}</p>
+              {(other.link || other.source) && (
+                <div className="actions">
+                  {other.link && (
+                    <a className="btn" href={other.link.href} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={other.name} data-umami-event-target="site">
+                      Visit site
+                      <Arrow dir="up-right" />
+                    </a>
+                  )}
+                  {other.source && (
+                    <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={other.name} data-umami-event-target="github">
+                      GitHub
+                      <Arrow dir="up-right" />
+                    </a>
+                  )}
+                  {other.link && <span className="project__note">{other.link.note}</span>}
+                </div>
+              )}
+            </div>
+            <div className="project__side">
+              <ul className="ticks">
+                {other.capabilities.map((capability) => (
+                  <li key={capability}>{capability}</li>
+                ))}
+              </ul>
+              <ul className="chips" aria-label="Stack">
+                {other.stack.map((tech) => (
+                  <li key={tech}>{tech}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figure className="wrap project__preview shot reveal">
+        <div className="browser">
+          <div className="browser__bar">
+            <span className="browser__dots" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
+            <span className="browser__url">{other.link ? other.link.label : other.name}</span>
+            <a
+              className="browser__open"
+              href={`${other.shot.src}-2400.webp`}
+              target="_blank"
+              rel="noopener"
+            >
+              Full size
+              <Arrow dir="up-right" />
+            </a>
+          </div>
+          <img
+            src={`${other.shot.src}-1600.webp`}
+            srcSet={`${other.shot.src}-800.webp 800w, ${other.shot.src}-1600.webp 1600w, ${other.shot.src}-2400.webp 2400w`}
+            sizes="(max-width: 90rem) 94vw, 1344px"
+            width={2400}
+            height={1500}
+            alt={other.shot.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption>{other.shot.caption}</figcaption>
+      </figure>
+    </div>
+  );
+}
+
 export default function Home() {
   const { axis, spans } = career;
   const tmb = projects.featured;
@@ -44,9 +132,9 @@ export default function Home() {
   const today = new Date();
   const now = today.getFullYear() + today.getMonth() / 12;
 
-  // "Latest writing" and the Writing link only appear once something is published.
+  // The Writing link is always there; "Latest writing" appears once something is published.
   const latest = getPosts().slice(0, 3);
-  const links = latest.length ? [...nav, { href: blogPath, label: "Writing" }] : nav;
+  const links = [...nav, { href: blogPath, label: "Writing" }];
   // Section numbers stay consecutive whether or not the writing section is shown.
   let section = 0;
   const nextSection = () => ++section;
@@ -182,38 +270,6 @@ export default function Home() {
                 ))}
               </ol>
 
-              {/* Built at work, so it lives here and not under side projects. */}
-              <div className="project cue reveal" id="cue">
-                <div className="project__main">
-                  <p className="status">
-                    <span className="live-dot" aria-hidden="true" />
-                    {cue.status}
-                  </p>
-                  <h3 className="project__name">{cue.name}</h3>
-                  <p className="project__tagline">{cue.tagline}</p>
-                  <p className="project__body">{cue.body}</p>
-                  <div className="actions">
-                    <a
-                      className="btn"
-                      href={cue.docs}
-                      target="_blank"
-                      rel="noopener"
-                      data-umami-event="outbound-project"
-                      data-umami-event-project={cue.name}
-                    >
-                      Read the docs
-                      <Arrow dir="up-right" />
-                    </a>
-                  </div>
-                </div>
-                <div className="project__side">
-                  <ul className="ticks">
-                    {cue.capabilities.map((capability) => (
-                      <li key={capability}>{capability}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -322,125 +378,52 @@ export default function Home() {
               <h2 className="reveal">{projects.heading}</h2>
               <p className="lede reveal">{projects.lede}</p>
 
-              <div className="project reveal">
-                <div className="project__main">
-                  <p className="status">
-                    <span className="live-dot" aria-hidden="true" />
-                    {tmb.status}
-                  </p>
-                  <h3 className="project__name">{tmb.name}</h3>
-                  <p className="project__body">{tmb.body}</p>
-                  <div className="actions">
-                    <a className="btn" href={tmb.url} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={tmb.name} data-umami-event-target="site">
-                      Visit site
-                      <Arrow dir="up-right" />
-                    </a>
-                    <a className="btn btn--ghost" href={tmb.source} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={tmb.name} data-umami-event-target="github">
-                      GitHub
-                      <Arrow dir="up-right" />
-                    </a>
+            </div>
+          </div>
+          <ProjectEntry other={projects.lead} first />
+          <div className="project-next">
+            <div className="wrap section__grid section__grid--plain">
+              <div className="section__body">
+                <div className="project reveal">
+                  <div className="project__main">
+                    <p className="status">
+                      <span className="live-dot" aria-hidden="true" />
+                      {tmb.status}
+                    </p>
+                    <h3 className="project__name">{tmb.name}</h3>
+                    <p className="project__body">{tmb.body}</p>
+                    <div className="actions">
+                      <a className="btn" href={tmb.url} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={tmb.name} data-umami-event-target="site">
+                        Visit site
+                        <Arrow dir="up-right" />
+                      </a>
+                      <a className="btn btn--ghost" href={tmb.source} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={tmb.name} data-umami-event-target="github">
+                        GitHub
+                        <Arrow dir="up-right" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="project__side">
-                  <ul className="ticks">
-                    {tmb.capabilities.map((capability) => (
-                      <li key={capability}>{capability}</li>
-                    ))}
-                  </ul>
-                  <ul className="chips" aria-label="Stack">
-                    {tmb.stack.map((tech) => (
-                      <li key={tech}>{tech}</li>
-                    ))}
-                  </ul>
+                  <div className="project__side">
+                    <ul className="ticks">
+                      {tmb.capabilities.map((capability) => (
+                        <li key={capability}>{capability}</li>
+                      ))}
+                    </ul>
+                    <ul className="chips" aria-label="Stack">
+                      {tmb.stack.map((tech) => (
+                        <li key={tech}>{tech}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="wrap project__preview reveal">
+              <LivePreview url={tmb.url} host={tmb.host} title={`Live preview of ${tmb.name}`} />
+            </div>
           </div>
-          <div className="wrap project__preview reveal">
-            <LivePreview url={tmb.url} host={tmb.host} title={`Live preview of ${tmb.name}`} />
-          </div>
-
           {projects.others.map((other) => (
-            <div key={other.name} className="project-next">
-              <div className="wrap section__grid section__grid--plain">
-                <div className="section__body">
-                  <div className="project reveal">
-                    <div className="project__main">
-                      <p className="status">
-                        {/* Pulsing dot: deployed and running. Hollow dot: not online yet. */}
-                        <span className={other.link ? "live-dot" : "live-dot live-dot--idle"} aria-hidden="true" />
-                        {other.status}
-                      </p>
-                      <h3 className="project__name">{other.name}</h3>
-                      <p className="project__tagline">{other.tagline}</p>
-                      <p className="project__body">{other.body}</p>
-                      {(other.link || other.source) && (
-                        <div className="actions">
-                          {other.link && (
-                            <a className="btn" href={other.link.href} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={other.name} data-umami-event-target="site">
-                              Visit site
-                              <Arrow dir="up-right" />
-                            </a>
-                          )}
-                          {other.source && (
-                            <a className="btn btn--ghost" href={other.source} target="_blank" rel="noopener" data-umami-event="outbound-project" data-umami-event-project={other.name} data-umami-event-target="github">
-                              GitHub
-                              <Arrow dir="up-right" />
-                            </a>
-                          )}
-                          {other.link && <span className="project__note">{other.link.note}</span>}
-                        </div>
-                      )}
-                    </div>
-                    <div className="project__side">
-                      <ul className="ticks">
-                        {other.capabilities.map((capability) => (
-                          <li key={capability}>{capability}</li>
-                        ))}
-                      </ul>
-                      <ul className="chips" aria-label="Stack">
-                        {other.stack.map((tech) => (
-                          <li key={tech}>{tech}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <figure className="wrap project__preview shot reveal">
-                <div className="browser">
-                  <div className="browser__bar">
-                    <span className="browser__dots" aria-hidden="true">
-                      <i />
-                      <i />
-                      <i />
-                    </span>
-                    <span className="browser__url">{other.link ? other.link.label : other.name}</span>
-                    <a
-                      className="browser__open"
-                      href={`${other.shot.src}-2400.webp`}
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Full size
-                      <Arrow dir="up-right" />
-                    </a>
-                  </div>
-                  <img
-                    src={`${other.shot.src}-1600.webp`}
-                    srcSet={`${other.shot.src}-800.webp 800w, ${other.shot.src}-1600.webp 1600w, ${other.shot.src}-2400.webp 2400w`}
-                    sizes="(max-width: 90rem) 94vw, 1344px"
-                    width={2400}
-                    height={1500}
-                    alt={other.shot.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <figcaption>{other.shot.caption}</figcaption>
-              </figure>
-            </div>
+            <ProjectEntry key={other.name} other={other} />
           ))}
         </section>
 

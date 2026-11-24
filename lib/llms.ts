@@ -1,7 +1,8 @@
 import { blogPath, formatDate, getPosts, postUrl } from "./blog";
-import { agents, career, cue, focus, projects, site, stack, writing } from "./site";
+import { agents, career, focus, projects, site, stack, writing } from "./site";
 
 const tmb = projects.featured;
+const lead = projects.lead;
 
 // Posts for the llms files: one line each, pointing at the HTML and the markdown twin.
 function writingList(): string {
@@ -37,10 +38,6 @@ This site is the personal portfolio of ${site.name}. The full agent-readable ver
 ${writingList()}
 - [All writing](${site.url}${blogPath}): Index of posts (markdown: ${site.url}${blogPath}index.md, RSS with full posts: ${site.url}${blogPath}rss.xml).
 
-## Work
-
-- [${cue.name}](${cue.docs}): ${cue.tagline} Built and maintained by ${site.givenName} at ${site.company.name}. ${cue.status}.
-
 ## Profiles
 
 - [GitHub](${site.github})
@@ -48,6 +45,7 @@ ${writingList()}
 
 ## Projects
 
+- [${lead.name}](${lead.link.href}): ${lead.tagline}. Built and maintained by ${site.givenName} at ${site.company.name}. ${lead.status} (${lead.link.note}).
 - [TheMovieBrowser](${tmb.url}): Movie/TV discovery with multi-source ratings, watchlists, and embedding-backed recommendations. Source: ${tmb.source}
 ${projects.others.map((p) => `- ${p.link ? `[${p.name}](${p.link.href})` : p.name}: ${p.tagline}. ${p.status}${p.link ? ` (${p.link.note})` : ""}.`).join("\n")}
 
@@ -87,12 +85,6 @@ ${rule}
 
 ${focus.items.map((item) => `### ${item.title}\n\n${item.body}`).join("\n\n")}
 
-### ${cue.name} — built at ${site.company.name}
-
-Status: ${cue.status}. ${cue.tagline} ${cue.body}
-
-- Docs: ${cue.docs}
-- Capabilities: ${cue.capabilities.join("; ")}.
 ${rule}
 ## Writing
 
@@ -112,6 +104,14 @@ ${rule}
 ${spans.map((s) => `### ${s.org} — ${s.role} (${s.period.replace(/—/g, "–")})\n\n${s.body}`).join("\n\n")}
 ${rule}
 ## Projects
+
+### ${lead.name} — ${lead.tagline}
+
+Status: ${lead.status}. Built at ${site.company.name}. ${lead.body}
+
+- Site: ${lead.link.href} (${lead.link.note})
+- Capabilities: ${lead.capabilities.join("; ")}.
+- Stack: ${lead.stack.join(", ")}.
 
 ### ${tmb.name}
 
