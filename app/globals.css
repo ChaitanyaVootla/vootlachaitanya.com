@@ -2055,7 +2055,7 @@ h2 {
   border: 1px solid var(--line-strong);
   border-radius: 0.75rem;
   background:
-    radial-gradient(circle, var(--line-strong) 1px, transparent 1.25px) 0 0 / 1.25rem 1.25rem,
+    radial-gradient(circle, var(--line) 0.75px, transparent 1px) 0 0 / 1.5rem 1.5rem,
     var(--bg-raise);
   color: var(--fg);
 }
@@ -2121,6 +2121,91 @@ h2 {
   .flow__step {
     color: var(--fg);
   }
+}
+
+/* A looping walk-through drawn in SVG. Parts marked .demo__s1 … .demo__s7
+   appear in that order over 16 s, hold, and the loop starts over. .demo__s3
+   is a "working" line, so it leaves again when the answer (.demo__s7) lands.
+   With reduced motion everything is simply visible. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Longhands on purpose: the build drops an animation shorthand that has no name. */
+  [class*="demo__s"] {
+    opacity: 0;
+    animation-duration: 16s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+
+  .demo__s1 {
+    animation-name: demo-1;
+  }
+
+  .demo__s2 {
+    animation-name: demo-2;
+  }
+
+  .demo__s3 {
+    animation-name: demo-3;
+  }
+
+  .demo__s4 {
+    animation-name: demo-4;
+  }
+
+  .demo__s5 {
+    animation-name: demo-5;
+  }
+
+  .demo__s6 {
+    animation-name: demo-6;
+  }
+
+  .demo__s7 {
+    animation-name: demo-7;
+  }
+}
+
+@keyframes demo-1 {
+  0%, 4% { opacity: 0; }
+  7%, 94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+@keyframes demo-2 {
+  0%, 14% { opacity: 0; }
+  17%, 94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+@keyframes demo-3 {
+  0%, 22% { opacity: 0; }
+  25%, 66% { opacity: 1; }
+  69%, 100% { opacity: 0; }
+}
+
+@keyframes demo-4 {
+  0%, 34% { opacity: 0; }
+  37%, 94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+@keyframes demo-5 {
+  0%, 44% { opacity: 0; }
+  47%, 94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+@keyframes demo-6 {
+  0%, 54% { opacity: 0; }
+  57%, 94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+@keyframes demo-7 {
+  0%, 68% { opacity: 0; }
+  71%, 94% { opacity: 1; }
+  98%, 100% { opacity: 0; }
 }
 
 @keyframes flow-march {
